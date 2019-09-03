@@ -1,4 +1,4 @@
-# fluttering_plants
+# Fluttery-plants
 
 Plants watering management
 
