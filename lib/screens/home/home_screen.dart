@@ -5,14 +5,13 @@ import 'package:fluttering_plants/screens/home/widgets/navigationbar.dart';
 import 'package:fluttering_plants/screens/home/widgets/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/screens/home/store/plant_list.dart';
-import 'package:fluttering_plants/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<PlantList>(
-      builder: (_) => PlantList(),
+      create: (_) => PlantList(),
       child: new Scaffold(
         body: PlantOverview(),
       ),
@@ -28,10 +27,9 @@ class PlantOverview extends StatelessWidget {
     return new Stack(
       children: <Widget>[
         new Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Color(0xFFeceff1)
-        ),
+            width: double.infinity,
+            height: double.infinity,
+            color: Color(0xFFeceff1)),
         Column(children: <Widget>[
           Container(
             width: double.infinity,
@@ -60,36 +58,6 @@ class PlantOverview extends StatelessWidget {
             ),
           ),
           Container(
-              height: 165.0,
-              child: Observer(
-                builder: (_) => ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: mapIndexed(
-                          plantList.plants,
-                          (index, plant) => Container(
-                              color: Colors.transparent,
-                              width: 150.0,
-                              margin: EdgeInsets.only(
-                                  left: index == 0 ? 20.0 : 5.0,
-                                  top: 5.0,
-                                  right: index == plantList.plants.length - 1
-                                      ? 24.0
-                                      : 5.0,
-                                  bottom: 5.0),
-                              child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              PlantScreen(plant: plant, tag: "water$index")),
-                                    );
-                                  },
-                                  child: PlantCard(plantList.plants[index], "water$index"))))
-                      .toList(),
-                ),
-              )),
-          Container(
             width: double.infinity,
             padding: const EdgeInsets.only(top: 30.0, left: 24.0, bottom: 10.0),
             child: Text(
@@ -104,28 +72,26 @@ class PlantOverview extends StatelessWidget {
           ),
           Expanded(
             child: Observer(
-              builder: (_) => GridView.builder(
+              builder: (_) => ListView.builder(
                   padding: EdgeInsets.all(0.0),
+                  scrollDirection: Axis.vertical,
                   itemCount: plantList.plants.length,
-                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemBuilder: (context, index) => Container(
-                      color: Colors.transparent,
-                      padding: EdgeInsets.only(
-                          left: index % 2 == 0 ? 20.0 : 5.0,
-                          top: 5.0,
-                          right: index % 2 != 0 ? 20.0 : 5.0,
-                          bottom: 5.0),
-                      child: InkWell(
+                  itemBuilder: (context, index) =>
+                      Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                          child: InkWell(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => PlantScreen(
-                                      plant: plantList.plants[index], tag: "overview$index")),
+                                      plant: plantList.plants[index],
+                                      tag: "overview$index")),
                             );
                           },
-                          child: PlantCard(plantList.plants[index], "overview$index")))),
+                          child: PlantCard(
+                              plantList.plants[index], "overview$index")))),
             ),
           ),
         ]),

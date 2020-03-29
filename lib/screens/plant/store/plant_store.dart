@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/repository/repository_provider.dart';
 import 'package:mobx/mobx.dart';
@@ -14,9 +13,6 @@ const msPerDay = 86400000;
 abstract class _PlantStore with Store {
   @observable
   Plant plant;
-
-  @observable
-  final notifications = FlutterLocalNotificationsPlugin();
 
   @action
   void initState(Plant plant) {

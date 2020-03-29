@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttering_plants/model/days.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
 import 'package:fluttering_plants/screens/plant/store/plant_store.dart';
@@ -24,7 +22,7 @@ class PlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<PlantStore>(
-        builder: (_) => PlantStore(),
+        create: (_) => PlantStore(),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
             body: PlantDetails(plant, tag)));
@@ -47,14 +45,6 @@ class PlantDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<PlantStore>(context);
 
-    final settingsAndroid = AndroidInitializationSettings('app_icon');
-    final settingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification: (id, title, body, payload) =>
-            onSelectNotification(context));
-
-    store.notifications.initialize(
-        InitializationSettings(settingsAndroid, settingsIOS),
-        onSelectNotification: onSelectNotification);
     store.initState(plant);
     return Scaffold(
       body: Stack(
@@ -358,8 +348,6 @@ class PlantDetails extends StatelessWidget {
                         child: BackdropIcon(
                             icon: Icon(Icons.alarm, color: Colors.white),
                             onClick: () {
-                              showOngoingNotification(store.notifications,
-                                  title: 'Tite', body: 'Body');
                             }),
                       ),
                       Padding(

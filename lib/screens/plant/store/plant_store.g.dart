@@ -62,6 +62,16 @@ mixin _$PlantStore on _PlantStore, Store {
   }
 
   @override
+  void deletePlant() {
+    final _$actionInfo = _$_PlantStoreActionController.startAction();
+    try {
+      return super.deletePlant();
+    } finally {
+      _$_PlantStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void fetch(int plantId) {
     final _$actionInfo = _$_PlantStoreActionController.startAction();
     try {
