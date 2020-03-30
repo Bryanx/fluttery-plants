@@ -27,7 +27,7 @@ dependencies:
   equatable: ^0.2.0
   mobx:
   flutter_mobx:
-  sliding_up_panel: ^0.3.4
+  sliding_up_panel: ^1.0.0
   camera:
   provider:
   flutter_local_notifications: ^0.8.2
@@ -59,6 +59,13 @@ flutter:
     - family:  CustomIcons
       fonts:
         - asset: assets/fonts/custom_icon_font.ttf
+    - family: AlegreyaSans
+      fonts:
+        - asset: assets/fonts/AlegreyaSans-Regular.ttf
+        - asset: assets/fonts/AlegreyaSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/AlegreyaSans-Bold.ttf
+          weight: 700
     - family:  Merriweather
       fonts:
         - asset: assets/fonts/Merriweather-Light.ttf

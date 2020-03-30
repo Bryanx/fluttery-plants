@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:fluttering_plants/common/utils.dart';
 import 'package:fluttering_plants/db/database.dart';
 import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/utils/utils.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PlantDao {

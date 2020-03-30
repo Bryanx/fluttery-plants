@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fluttering_plants/common/utils.dart';
 import 'package:fluttering_plants/db/test_data.dart';
-import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/utils/utils.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';

@@ -47,11 +47,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
                       child: Text(
                         'Orchid',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Open Sans',
-                            fontSize: 42,
-                            color: Color(0xFF21293A),
-                            fontWeight: FontWeight.w700),
+                        style: Theme.of(context).textTheme.title,
                       ))
                 ],
               ),
@@ -63,9 +59,10 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
             bottom: TabBar(
               labelColor: Color(0xFF21293A),
               indicatorColor: Colors.transparent,
+              unselectedLabelColor: Color(0x4D21293A),
               labelStyle: TextStyle(
-                fontFamily: 'Open Sans',
-                fontSize: 16,
+                fontFamily: 'AlegreyaSans',
+                fontSize: 18,
                 color: Color(0xFF21293A),
                 fontWeight: FontWeight.w500,
               ),

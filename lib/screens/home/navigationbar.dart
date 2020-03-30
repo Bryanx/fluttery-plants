@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttering_plants/utils/custom_icons.dart';
+import 'package:fluttering_plants/common/custom_icons.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/home/plant_list_store.dart';
 import 'package:provider/provider.dart';
