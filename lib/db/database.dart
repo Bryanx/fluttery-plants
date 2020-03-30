@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fluttering_plants/db/test_data.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/utils/utils.dart';
 import 'package:path/path.dart';
@@ -50,27 +51,8 @@ class DatabaseProvider {
   }
 
   Future<void> populateDb(Database db) async {
-    var now = DateTime.now().millisecondsSinceEpoch;
-    db.insert(DB_NAME, Plant(
-        id:1,
-        name: "Sansevieria trifasciata",
-        nickName: "Snake plant",
-        imgPath: "assets/sensevieria.jpg",
-        waterStart: now,
-        fertilizerStart: now).toJson());
-    db.insert(DB_NAME, Plant(
-        id: 2,
-        name: "Tradescantia zebrina",
-        nickName: "Inchplant",
-        imgPath: "assets/inch.jpg",
-        waterStart: now,
-        fertilizerStart: now).toJson());
-    db.insert(DB_NAME, Plant(
-        id:3,
-        name: "Monstera deliciosa",
-        nickName: "Windowleaf",
-        imgPath: "assets/monstera.jpg",
-        waterStart: now,
-        fertilizerStart: now).toJson());
+    TestData.generateTestPlants()
+        .map((plant) => plant.toJson())
+        .forEach((plantJson) => db.insert(DB_NAME, plantJson));
   }
 }

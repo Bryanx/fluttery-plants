@@ -1,20 +1,17 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttering_plants/screens/picture/picture_screen.dart';
 import 'package:fluttering_plants/utils/custom_icons.dart';
 import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/screens/home/store/plant_list.dart';
+import 'package:fluttering_plants/screens/home/plant_list_store.dart';
 import 'package:provider/provider.dart';
 
 class NavigationBar extends StatelessWidget {
   final plantNameController = TextEditingController(text: "");
 
-
   @override
   Widget build(BuildContext context) {
-    final plantList = Provider.of<PlantList>(context);
+    final plantList = Provider.of<PlantListStore>(context);
     return BottomNavigationBar(
       selectedItemColor: Colors.black,
       backgroundColor: Colors.white,

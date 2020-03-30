@@ -1,13 +1,12 @@
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/repository/repository_provider.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 
-part 'plant_list.g.dart';
+part 'plant_list_store.g.dart';
 
-class PlantList = _PlantList with _$PlantList;
+class PlantListStore = _PlantListStore with _$PlantListStore;
 
-abstract class _PlantList with Store {
+abstract class _PlantListStore with Store {
   @observable
   ObservableList<Plant> plants = ObservableList<Plant>();
 

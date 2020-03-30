@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttering_plants/screens/home/widgets/navigationbar.dart';
-import 'package:fluttering_plants/screens/home/widgets/plant_card.dart';
+import 'package:fluttering_plants/screens/home/navigationbar.dart';
+import 'package:fluttering_plants/screens/home/plant_card.dart';
+import 'package:fluttering_plants/screens/home/plant_tabs.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
-import 'package:fluttering_plants/screens/home/store/plant_list.dart';
+import 'package:fluttering_plants/screens/home/plant_list_store.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<PlantList>(
-      create: (_) => PlantList(),
+    return Provider<PlantListStore>(
+      create: (_) => PlantListStore(),
       child: new Scaffold(
-        body: PlantOverview(),
+        body: Stack(
+          children: <Widget>[
+            PlantTabs(),
+            Align(alignment: Alignment.bottomCenter, child: NavigationBar()),
+          ],
+        ),
       ),
     );
   }
@@ -22,7 +28,7 @@ class HomeScreen extends StatelessWidget {
 class PlantOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final plantList = Provider.of<PlantList>(context);
+    final plantList = Provider.of<PlantListStore>(context);
     plantList.fetch();
     return new Stack(
       children: <Widget>[
@@ -41,19 +47,6 @@ class PlantOverview extends StatelessWidget {
                 fontSize: 42,
                 color: Color(0xFF21293A),
                 fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.only(top: 10.0, left: 24.0, bottom: 10.0),
-            child: Text(
-              "Ready for watering",
-              style: TextStyle(
-                fontFamily: 'Open Sans',
-                fontSize: 23,
-                color: Color(0xFF21293A),
-                fontWeight: FontWeight.w500,
               ),
             ),
           ),

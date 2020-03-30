@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'plant_list.dart';
+part of 'plant_list_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'plant_list.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$PlantList on _PlantList, Store {
-  final _$plantsAtom = Atom(name: '_PlantList.plants');
+mixin _$PlantListStore on _PlantListStore, Store {
+  final _$plantsAtom = Atom(name: '_PlantListStore.plants');
 
   @override
   ObservableList<Plant> get plants {
@@ -26,35 +26,36 @@ mixin _$PlantList on _PlantList, Store {
     }, _$plantsAtom, name: '${_$plantsAtom.name}_set');
   }
 
-  final _$_PlantListActionController = ActionController(name: '_PlantList');
+  final _$_PlantListStoreActionController =
+      ActionController(name: '_PlantListStore');
 
   @override
   void add(Plant plant) {
-    final _$actionInfo = _$_PlantListActionController.startAction();
+    final _$actionInfo = _$_PlantListStoreActionController.startAction();
     try {
       return super.add(plant);
     } finally {
-      _$_PlantListActionController.endAction(_$actionInfo);
+      _$_PlantListStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void update(Plant plant) {
-    final _$actionInfo = _$_PlantListActionController.startAction();
+    final _$actionInfo = _$_PlantListStoreActionController.startAction();
     try {
       return super.update(plant);
     } finally {
-      _$_PlantListActionController.endAction(_$actionInfo);
+      _$_PlantListStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void fetch() {
-    final _$actionInfo = _$_PlantListActionController.startAction();
+    final _$actionInfo = _$_PlantListStoreActionController.startAction();
     try {
       return super.fetch();
     } finally {
-      _$_PlantListActionController.endAction(_$actionInfo);
+      _$_PlantListStoreActionController.endAction(_$actionInfo);
     }
   }
 }
