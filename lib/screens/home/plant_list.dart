@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/screens/home/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
+import 'package:fluttering_plants/screens/plant/plant_hero.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/screens/home/plant_list_store.dart';
 import 'package:provider/provider.dart';
@@ -26,18 +27,22 @@ class PlantList extends StatelessWidget {
                 itemBuilder: (context, index) => Container(
                     color: Colors.transparent,
                     padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
+                    child: PlantHero(
+                      tag: "plant$index",
+                      photo: plantList.plants[index].imgPath,
+                      height: 170.0,
+                      width: MediaQuery.of(context).size.width,
+                      title: plantList.plants[index].nickName,
+                      subTitle: plantList.plants[index].name,
+                      onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => PlantScreen(
                                     plant: plantList.plants[index],
                                     tag: "plant$index")),
-                          );
-                        },
-                        child: PlantCard(
-                            plant: plantList.plants[index],
-                            tag: "plant$index")))),
+                          ),
+                    )
+                )
+            ),
           ),
         ),
       ],

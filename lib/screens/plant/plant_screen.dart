@@ -6,7 +6,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/common/custom_icons.dart';
 import 'package:fluttering_plants/common/utils.dart';
 import 'package:fluttering_plants/model/plant.dart';
+import 'package:fluttering_plants/screens/home/plant_list.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
+import 'package:fluttering_plants/screens/plant/plant_hero.dart';
 import 'package:fluttering_plants/screens/plant/plant_store.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
@@ -54,89 +56,22 @@ class PlantDetails extends StatelessWidget {
                 child: FutureBuilder<List<CameraDescription>>(
                   future: availableCameras(),
                   builder: (context,
-                      AsyncSnapshot<List<CameraDescription>> snapshot) =>
+                          AsyncSnapshot<List<CameraDescription>> snapshot) =>
                       InkWell(
-                        onTap: () {
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            onOpenCamera(context, snapshot, store);
-                          }
-                        },
-                        child: Hero(
+                          onTap: () {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              onOpenCamera(context, snapshot, store);
+                            }
+                          },
+                          child: PlantHero(
                             tag: tag,
-                            child: Observer(
-                                builder: (_) =>
-                                    Stack(
-                                      children: <Widget>[
-                                        Container(
-                                          width: double.infinity,
-                                          height: MediaQuery
-                                              .of(context)
-                                              .size
-                                              .height * 0.50,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: loadImage(store.plant.imgPath),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: MediaQuery
-                                              .of(context)
-                                              .size
-                                              .height * 0.50,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              gradient: LinearGradient(
-                                                  begin: FractionalOffset.topCenter,
-                                                  end: FractionalOffset.bottomCenter,
-                                                  colors: [
-                                                    Colors.grey.withOpacity(0.0),
-                                                    Colors.black54,
-                                                  ],
-                                                  stops: [
-                                                    0.0,
-                                                    1.0
-                                                  ])),
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: MediaQuery
-                                              .of(context)
-                                              .size
-                                              .height * 0.50,
-                                          padding: const EdgeInsets.only(left: 24.0, bottom: 24.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: <Widget>[
-                                              Padding(
-                                                padding: const EdgeInsets.only(bottom: 4.0),
-                                                child: Text(
-                                                  store.plant.nickName,
-                                                  style: TextStyle(
-                                                    fontFamily: 'AlegreyaSans',
-                                                    fontSize: 36,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                store.plant.name,
-                                                style: TextStyle(
-                                                  fontFamily: 'AlegreyaSans',
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ))),
-                      ),
+                            photo: store.plant.imgPath,
+                            title: plant.nickName,
+                            subTitle: plant.name,
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.50,
+                          )),
                 ),
               ),
               Align(
@@ -171,8 +106,7 @@ class PlantDetails extends StatelessWidget {
                           Column(
                             children: <Widget>[
                               Container(
-                                width:
-                                MediaQuery.of(context).size.width * 0.42,
+                                width: MediaQuery.of(context).size.width * 0.42,
                                 height: 200.0,
                                 decoration: BoxDecoration(
                                     color: Color(0xFFecf0f2),
@@ -182,7 +116,7 @@ class PlantDetails extends StatelessWidget {
                                   padding: const EdgeInsets.all(16.0),
                                   child: Column(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Align(
                                         alignment: Alignment.topLeft,
@@ -213,8 +147,7 @@ class PlantDetails extends StatelessWidget {
                                                     fontFamily: 'Open Sans',
                                                     fontSize: 26,
                                                     color: Color(0xFF21293A),
-                                                    fontWeight:
-                                                    FontWeight.w700,
+                                                    fontWeight: FontWeight.w700,
                                                   ),
                                                 ),
                                               ))
@@ -258,11 +191,11 @@ class PlantDetails extends StatelessWidget {
                                           items: days
                                               .map<DropdownMenuItem<int>>(
                                                   (int value) {
-                                                return DropdownMenuItem<int>(
-                                                  value: value,
-                                                  child: Text(value.toString()),
-                                                );
-                                              }).toList(),
+                                            return DropdownMenuItem<int>(
+                                              value: value,
+                                              child: Text(value.toString()),
+                                            );
+                                          }).toList(),
                                         ),
                                       ),
                                     ),
@@ -283,8 +216,7 @@ class PlantDetails extends StatelessWidget {
                           Column(
                             children: <Widget>[
                               Container(
-                                width:
-                                MediaQuery.of(context).size.width * 0.42,
+                                width: MediaQuery.of(context).size.width * 0.42,
                                 height: 200.0,
                                 decoration: BoxDecoration(
                                     color: Color(0xFFecf0f2),
@@ -294,7 +226,7 @@ class PlantDetails extends StatelessWidget {
                                   padding: const EdgeInsets.all(16.0),
                                   child: Column(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Align(
                                         alignment: Alignment.topLeft,
@@ -325,8 +257,7 @@ class PlantDetails extends StatelessWidget {
                                                     fontFamily: 'Open Sans',
                                                     fontSize: 26,
                                                     color: Color(0xFF21293A),
-                                                    fontWeight:
-                                                    FontWeight.w700,
+                                                    fontWeight: FontWeight.w700,
                                                   ),
                                                 ),
                                               ))
@@ -361,8 +292,7 @@ class PlantDetails extends StatelessWidget {
                                             color: Color(0xFF21293A),
                                             fontWeight: FontWeight.w700,
                                           ),
-                                          value:
-                                          store.plant.fertilizerInterval,
+                                          value: store.plant.fertilizerInterval,
                                           onChanged: (int newValue) {
                                             var plant = store.plant.copyWith(
                                                 fertilizerInterval: newValue);
@@ -371,11 +301,11 @@ class PlantDetails extends StatelessWidget {
                                           items: days
                                               .map<DropdownMenuItem<int>>(
                                                   (int value) {
-                                                return DropdownMenuItem<int>(
-                                                  value: value,
-                                                  child: Text(value.toString()),
-                                                );
-                                              }).toList(),
+                                            return DropdownMenuItem<int>(
+                                              value: value,
+                                              child: Text(value.toString()),
+                                            );
+                                          }).toList(),
                                         ),
                                       ),
                                     ),
@@ -405,8 +335,7 @@ class PlantDetails extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: BackdropIcon(
-                          icon:
-                          Icon(Icons.delete_outline, color: Colors.white),
+                          icon: Icon(Icons.delete_outline, color: Colors.white),
                           onClick: () {
                             store.deletePlant();
                             Navigator.pop(context);

@@ -15,13 +15,14 @@ class NavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       selectedItemColor: Colors.black,
       backgroundColor: Colors.white,
+      iconSize: 40.0,
       elevation: 0.0,
       currentIndex: 0,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       items: [
         new BottomNavigationBarItem(
-          icon: Icon(CustomIcons.home_outline, size: 18),
+          icon: ImageIcon(AssetImage("assets/icons/sucus.png")),
           title: Text(''),
         ),
         new BottomNavigationBarItem(

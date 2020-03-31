@@ -62,7 +62,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
               unselectedLabelColor: Color(0x4D21293A),
               labelStyle: TextStyle(
                 fontFamily: 'AlegreyaSans',
-                fontSize: 18,
+                fontSize: 22,
                 color: Color(0xFF21293A),
                 fontWeight: FontWeight.w500,
               ),
