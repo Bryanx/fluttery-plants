@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+///
+/// Contains the hero animation.
+///
 class PlantHero extends StatelessWidget {
   const PlantHero({Key key,
     this.tag,
@@ -20,8 +23,7 @@ class PlantHero extends StatelessWidget {
   final String title;
   final String subTitle;
 
-  static const opacityCurve =
-  const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
+  static const opacityCurve = const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
 
   static RectTween _createRectTween(Rect begin, Rect end) {
     return MaterialRectCenterArcTween(begin: begin, end: end);

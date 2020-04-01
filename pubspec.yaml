@@ -31,6 +31,7 @@ dependencies:
   camera:
   provider:
   flutter_local_notifications: ^0.8.2
+  flutter_svg: ^0.17.3+1
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,11 @@ flutter:
     - assets/monstera.jpg
     - assets/inch.jpg
     - assets/icons/sucus.png
+    - assets/icons/gear.png
+    - assets/icons/shears.png
+    - assets/icons/can2.png
+    - assets/icons/sucus.svg
+    - assets/icons/shears.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

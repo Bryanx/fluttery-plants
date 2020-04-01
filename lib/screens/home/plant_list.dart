@@ -5,7 +5,8 @@ import 'package:fluttering_plants/screens/home/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:fluttering_plants/screens/plant/plant_hero.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
-import 'package:fluttering_plants/screens/home/plant_list_store.dart';
+import 'package:fluttering_plants/stores/main_store.dart';
+import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:provider/provider.dart';
 
 ///
@@ -14,7 +15,7 @@ import 'package:provider/provider.dart';
 class PlantList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final plantList = Provider.of<PlantListStore>(context);
+    final plantList = Provider.of<MainStore>(context).plantListStore;
     plantList.fetch();
     return Column(
       children: <Widget>[

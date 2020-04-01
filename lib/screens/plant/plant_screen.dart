@@ -9,7 +9,8 @@ import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/home/plant_list.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
 import 'package:fluttering_plants/screens/plant/plant_hero.dart';
-import 'package:fluttering_plants/screens/plant/plant_store.dart';
+import 'package:fluttering_plants/stores/main_store.dart';
+import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +22,8 @@ class PlantScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<PlantStore>(
-        create: (_) => PlantStore(),
+    return Provider<MainStore>(
+        create: (_) => MainStore(),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
             body: PlantDetails(plant, tag)));
@@ -43,7 +44,7 @@ class PlantDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PlantStore>(context);
+    final store = Provider.of<MainStore>(context).plantStore;
 
     store.initState(plant);
     return Scaffold(

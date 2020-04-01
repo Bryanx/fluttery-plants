@@ -16,7 +16,6 @@ abstract class _PlantStore with Store {
 
   @action
   void initState(Plant plant) {
-
     this.plant = plant;
     fetch(plant.id);
   }
