@@ -8,14 +8,15 @@ part of 'plant.dart';
 
 Plant _$PlantFromJson(Map<String, dynamic> json) {
   return Plant(
-      id: json['id'],
-      name: json['name'],
-      nickName: json['nick_name'],
-      imgPath: json['img_path'],
-      waterStart: json['water_start'],
-      waterInterval: json['water_interval'],
-      fertilizerStart: json['fertilizer_start'],
-      fertilizerInterval: json['fertilizer_interval']);
+    id: json['id'],
+    name: json['name'],
+    nickName: json['nick_name'],
+    imgPath: json['img_path'],
+    waterStart: json['water_start'],
+    waterInterval: json['water_interval'],
+    fertilizerStart: json['fertilizer_start'],
+    fertilizerInterval: json['fertilizer_interval'],
+  );
 }
 
 Map<String, dynamic> _$PlantToJson(Plant instance) => <String, dynamic>{
@@ -26,7 +27,7 @@ Map<String, dynamic> _$PlantToJson(Plant instance) => <String, dynamic>{
       'water_start': instance.waterStart,
       'water_interval': instance.waterInterval,
       'fertilizer_start': instance.fertilizerStart,
-      'fertilizer_interval': instance.fertilizerInterval
+      'fertilizer_interval': instance.fertilizerInterval,
     };
 
 // **************************************************************************

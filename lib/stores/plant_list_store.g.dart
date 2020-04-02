@@ -26,36 +26,24 @@ mixin _$PlantListStore on _PlantListStore, Store {
     }, _$plantsAtom, name: '${_$plantsAtom.name}_set');
   }
 
-  final _$_PlantListStoreActionController =
-      ActionController(name: '_PlantListStore');
+  final _$addAsyncAction = AsyncAction('add');
 
   @override
-  void add(Plant plant) {
-    final _$actionInfo = _$_PlantListStoreActionController.startAction();
-    try {
-      return super.add(plant);
-    } finally {
-      _$_PlantListStoreActionController.endAction(_$actionInfo);
-    }
+  Future<dynamic> add(Plant plant) {
+    return _$addAsyncAction.run(() => super.add(plant));
   }
 
-  @override
-  void update(Plant plant) {
-    final _$actionInfo = _$_PlantListStoreActionController.startAction();
-    try {
-      return super.update(plant);
-    } finally {
-      _$_PlantListStoreActionController.endAction(_$actionInfo);
-    }
-  }
+  final _$updateAsyncAction = AsyncAction('update');
 
   @override
-  void fetch() {
-    final _$actionInfo = _$_PlantListStoreActionController.startAction();
-    try {
-      return super.fetch();
-    } finally {
-      _$_PlantListStoreActionController.endAction(_$actionInfo);
-    }
+  Future<dynamic> update(Plant plant) {
+    return _$updateAsyncAction.run(() => super.update(plant));
+  }
+
+  final _$fetchAsyncAction = AsyncAction('fetch');
+
+  @override
+  Future<dynamic> fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
   }
 }

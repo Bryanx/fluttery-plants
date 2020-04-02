@@ -11,20 +11,20 @@ abstract class _PlantListStore with Store {
   ObservableList<Plant> plants = ObservableList<Plant>();
 
   @action
-  void add(Plant plant) {
-    RepositoryProvider.provider.plantRepo.insert(plant);
-    fetch();
+  Future add(Plant plant) async {
+    await RepositoryProvider.provider.plantRepo.insert(plant);
+    await fetch();
   }
 
   @action
-  void update(Plant plant) {
-    RepositoryProvider.provider.plantRepo.update(plant);
-    fetch();
+  Future update(Plant plant) async {
+    await RepositoryProvider.provider.plantRepo.update(plant);
+    await fetch();
   }
 
   @action
-  void fetch() {
-    RepositoryProvider.provider.plantRepo
+  Future fetch() async {
+    await RepositoryProvider.provider.plantRepo
         .getAll()
         .then((result) => plants = ObservableList.of(result));
   }

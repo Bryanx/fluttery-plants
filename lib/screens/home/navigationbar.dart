@@ -28,7 +28,7 @@ class NavigationBar extends StatelessWidget {
       builder: (_) => BottomNavigationBar(
         selectedItemColor: selectedColor,
         unselectedItemColor: unSelectedColor,
-        backgroundColor: Color(0xCCFFFFFF),
+        backgroundColor: Colors.white,
         iconSize: iconSize,
         elevation: 0.0,
         currentIndex: mainStore.navigationIndex,
