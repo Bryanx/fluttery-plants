@@ -15,6 +15,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent
   ));
+//  debugPaintSizeEnabled = true;
   timeDilation = 1.0;
   runApp(new MaterialApp(
     theme: appTheme,

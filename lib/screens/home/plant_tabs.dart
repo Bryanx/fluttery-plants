@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/screens/home/plant_list.dart';
 
 class PlantTabs extends StatefulWidget {
@@ -11,6 +12,8 @@ class PlantTabs extends StatefulWidget {
 class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
   ScrollController _scrollViewController;
   TabController _tabController;
+  final selectedTabColor = ColorUtil.darken(ColorUtil.primaryColor, .2);
+  final unSelectedTabColor = ColorUtil.grey;
 
   @override
   void initState() {
@@ -24,6 +27,25 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
     _scrollViewController.dispose();
     _tabController.dispose();
     super.dispose();
+  }
+
+  createTabBar() {
+    return TabBar(
+      labelColor: selectedTabColor,
+      indicatorColor: Colors.transparent,
+      unselectedLabelColor: unSelectedTabColor,
+      labelStyle: TextStyle(
+        fontFamily: 'AlegreyaSans',
+        fontSize: 22,
+        color: Color(0xFF21293A),
+        fontWeight: FontWeight.w500,
+      ),
+      tabs: <Tab>[
+        Tab(text: "All"),
+        Tab(text: "Living room"),
+      ],
+      controller: _tabController,
+    );
   }
 
   @override
@@ -69,25 +91,6 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
         ],
         controller: _tabController,
       ),
-    );
-  }
-
-  createTabBar() {
-    return TabBar(
-      labelColor: Color(0xFF21293A),
-      indicatorColor: Colors.transparent,
-      unselectedLabelColor: Color(0x4D21293A),
-      labelStyle: TextStyle(
-        fontFamily: 'AlegreyaSans',
-        fontSize: 22,
-        color: Color(0xFF21293A),
-        fontWeight: FontWeight.w500,
-      ),
-      tabs: <Tab>[
-        Tab(text: "All"),
-        Tab(text: "Living room"),
-      ],
-      controller: _tabController,
     );
   }
 }

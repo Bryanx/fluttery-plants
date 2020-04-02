@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'color_util.dart';
+
 ///
 /// Contains the theme for the app.
 ///
+
 final ThemeData appTheme = ThemeData(
   // Define the default brightness and colors.
   brightness: Brightness.light,
-  primaryColor: Colors.lightBlue[800],
-  accentColor: Colors.cyan[600],
+  primaryColor: ColorUtil.primaryColor,
+  accentColor: ColorUtil.accentColor,
+
+  // Colors to remove splash on Android
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
 

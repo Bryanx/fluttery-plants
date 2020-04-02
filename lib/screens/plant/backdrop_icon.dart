@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttering_plants/common/color_util.dart';
 
 
 class BackdropIcon extends StatelessWidget {
   final icon;
   final Function onClick;
-  final bgColor;
+  final bgColor = ColorUtil.primaryColor;
 
-  BackdropIcon({this.icon, this.onClick, this.bgColor = Colors.blueGrey});
+  BackdropIcon({this.icon, this.onClick});
 
   @override
   Widget build(BuildContext context) {

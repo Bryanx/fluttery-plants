@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/screens/home/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
-import 'package:fluttering_plants/screens/plant/plant_hero.dart';
+import 'package:fluttering_plants/screens/animations/plant_hero.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:fluttering_plants/stores/plant_list_store.dart';

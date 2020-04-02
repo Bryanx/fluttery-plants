@@ -8,7 +8,8 @@ import 'package:fluttering_plants/common/utils.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/home/plant_list.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
-import 'package:fluttering_plants/screens/plant/plant_hero.dart';
+import 'package:fluttering_plants/screens/animations/plant_hero.dart';
+import 'package:fluttering_plants/screens/plant/reminder_card.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
@@ -60,8 +61,7 @@ class PlantDetails extends StatelessWidget {
                           AsyncSnapshot<List<CameraDescription>> snapshot) =>
                       InkWell(
                           onTap: () {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
+                            if (snapshot.connectionState == ConnectionState.done) {
                               onOpenCamera(context, snapshot, store);
                             }
                           },
@@ -104,234 +104,16 @@ class PlantDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.42,
-                                height: 200.0,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFecf0f2),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(24.0))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: BackdropIcon(
-                                            icon: Icon(CustomIcons.drop,
-                                                color: Colors.white),
-                                            onClick: null),
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: Text(
-                                                "Water",
-                                                style: TextStyle(
-                                                  fontFamily: 'Open Sans',
-                                                  fontSize: 16,
-                                                  color: Color(0xFFbbbfc2),
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              )),
-                                          Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: Observer(
-                                                builder: (_) => Text(
-                                                  store.waterDaysLeft,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Open Sans',
-                                                    fontSize: 26,
-                                                    color: Color(0xFF21293A),
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16.0, top: 8.0, right: 16.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      "Every",
-                                      style: TextStyle(
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        color: Color(0xFFbbbfc2),
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0, right: 4.0),
-                                      child: Observer(
-                                        builder: (_) => DropdownButton<int>(
-                                          style: TextStyle(
-                                            fontFamily: 'Open Sans',
-                                            fontSize: 18,
-                                            color: Color(0xFF21293A),
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                          value: store.plant.waterInterval,
-                                          onChanged: (int newValue) {
-                                            var plant = store.plant.copyWith(
-                                                waterInterval: newValue);
-                                            store.updatePlant(plant);
-                                          },
-                                          items: days
-                                              .map<DropdownMenuItem<int>>(
-                                                  (int value) {
-                                            return DropdownMenuItem<int>(
-                                              value: value,
-                                              child: Text(value.toString()),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      "days.",
-                                      style: TextStyle(
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        color: Color(0xFFbbbfc2),
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.42,
-                                height: 200.0,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFecf0f2),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(24.0))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: BackdropIcon(
-                                            icon: Icon(CustomIcons.flash,
-                                                color: Colors.white),
-                                            onClick: null),
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: Text(
-                                                "Fertilizer",
-                                                style: TextStyle(
-                                                  fontFamily: 'Open Sans',
-                                                  fontSize: 16,
-                                                  color: Color(0xFFbbbfc2),
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              )),
-                                          Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: Observer(
-                                                builder: (_) => Text(
-                                                  store.fertilizeDaysLeft,
-                                                  style: TextStyle(
-                                                    fontFamily: 'Open Sans',
-                                                    fontSize: 26,
-                                                    color: Color(0xFF21293A),
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16.0, top: 8.0, right: 16.0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      "Every",
-                                      style: TextStyle(
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        color: Color(0xFFbbbfc2),
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 8.0, right: 4.0),
-                                      child: Observer(
-                                        builder: (_) => DropdownButton<int>(
-                                          style: TextStyle(
-                                            fontFamily: 'Open Sans',
-                                            fontSize: 18,
-                                            color: Color(0xFF21293A),
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                          value: store.plant.fertilizerInterval,
-                                          onChanged: (int newValue) {
-                                            var plant = store.plant.copyWith(
-                                                fertilizerInterval: newValue);
-                                            store.updatePlant(plant);
-                                          },
-                                          items: days
-                                              .map<DropdownMenuItem<int>>(
-                                                  (int value) {
-                                            return DropdownMenuItem<int>(
-                                              value: value,
-                                              child: Text(value.toString()),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      "days.",
-                                      style: TextStyle(
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        color: Color(0xFFbbbfc2),
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                          ReminderCard(
+                              icon: CustomIcons.drop,
+                              subText: "Water",
+                              title: "waterDaysLeft"),
+                          ReminderCard(
+                              icon: CustomIcons.flash,
+                              subText: "Fertilizer",
+                              title: "fertilizerDaysLeft"),
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: BackdropIcon(
-                          icon: Icon(Icons.alarm, color: Colors.white),
-                          onClick: () {}),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),

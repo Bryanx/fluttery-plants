@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttering_plants/common/app_theme.dart';
+import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/custom_icons.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
@@ -15,9 +17,9 @@ import 'package:provider/provider.dart';
 
 class NavigationBar extends StatelessWidget {
   final plantNameController = TextEditingController(text: "");
-  final selectedColor = Colors.green;
-  final unSelectedColor = Colors.grey;
-  final iconSize = 38.0;
+  final selectedColor = ColorUtil.darken(ColorUtil.primaryColor, .1);
+  final unSelectedColor = ColorUtil.grey;
+  final iconSize = 34.0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class NavigationBar extends StatelessWidget {
         currentIndex: mainStore.navigationIndex,
         showSelectedLabels: true,
         showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
         items: [
           new BottomNavigationBarItem(
             activeIcon: SvgPicture.asset("assets/icons/sucus.svg", height: iconSize, color: selectedColor),
@@ -44,9 +47,19 @@ class NavigationBar extends StatelessWidget {
             title: Text('Watering'),
           ),
           new BottomNavigationBarItem(
+              icon: SvgPicture.asset("assets/icons/can.svg", height: iconSize, color: Colors.transparent),
+              title: Text('')
+          ),
+          new BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset("assets/icons/farmer.svg", height: iconSize, color: selectedColor),
+              icon: SvgPicture.asset("assets/icons/farmer.svg", height: iconSize, color: unSelectedColor),
+              title: Text('Profile')
+          ),
+          new BottomNavigationBarItem(
               activeIcon: SvgPicture.asset("assets/icons/shears.svg", height: iconSize, color: selectedColor),
               icon: SvgPicture.asset("assets/icons/shears.svg", height: iconSize, color: unSelectedColor),
-              title: Text('Settings'))
+              title: Text('Settings')
+          )
         ],
         onTap: (int index) {
           mainStore.setNavigationIndex(index);
