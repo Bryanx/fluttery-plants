@@ -18,11 +18,14 @@ import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
 
+///
+/// Single plant screen
+///
 class PlantScreen extends StatelessWidget {
   final Plant plant;
-  final tag;
+  final index;
 
-  PlantScreen({this.plant, this.tag});
+  PlantScreen({this.plant, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +33,16 @@ class PlantScreen extends StatelessWidget {
         create: (_) => MainStore(),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
-            body: _PlantScreen(plant, tag)));
+            body: _PlantScreen(plant, index)));
   }
 }
 
 class _PlantScreen extends StatelessWidget {
   final days = List<int>.generate(60, (i) => i += 1);
-  final tag;
+  final index;
   final plant;
 
-  _PlantScreen(this.plant, this.tag);
+  _PlantScreen(this.plant, this.index);
 
   Future onSelectNotification(context) async => await Navigator.push(
         context,
@@ -160,12 +163,21 @@ class _PlantScreen extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: PlantHero(
-        tag: tag,
+        index: index,
         photo: store.plant.imgPath,
         title: plant.nickName,
         subTitle: plant.name,
+        editableText: true,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.50,
+        onTitleChanged: (value) {
+          plant.nickName = value;
+          store.updatePlant(plant);
+        },
+        onSubTitleChanged: (value) {
+          plant.name = value;
+          store.updatePlant(plant);
+        },
       ),
     );
   }

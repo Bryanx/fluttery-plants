@@ -40,18 +40,19 @@ class PlantList extends StatelessWidget {
   }
 
   getHero(PlantListStore plantListStore, int index, BuildContext context) {
+    var plant = plantListStore.plants[index];
     return PlantHero(
-      tag: "plant$index",
-      photo: plantListStore.plants[index].imgPath,
+      photo: plant.imgPath,
       height: 170.0,
       width: MediaQuery.of(context).size.width,
-      title: plantListStore.plants[index].nickName,
-      subTitle: plantListStore.plants[index].name,
+      title: plant.nickName,
+      subTitle: plant.name,
+      index: index,
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => PlantScreen(
-                plant: plantListStore.plants[index],
-                tag: "plant$index")),
+                plant: plant,
+                index: index)),
       ),
     );
   }

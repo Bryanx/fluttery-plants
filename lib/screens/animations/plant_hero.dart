@@ -1,29 +1,33 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
 
 ///
 /// Contains the hero animation.
 ///
 class PlantHero extends StatelessWidget {
   const PlantHero({Key key,
-    this.tag,
+    this.index,
     this.photo,
     this.onTap,
     this.width,
     this.height,
     this.title,
-    this.subTitle})
+    this.subTitle,
+    this.onTitleChanged,
+    this.onSubTitleChanged,
+    this.editableText = false})
       : super(key: key);
 
   final String photo;
   final VoidCallback onTap;
   final double width;
   final double height;
-  final String tag;
+  final int index;
   final String title;
   final String subTitle;
-
-  static const opacityCurve = const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
+  final Function(String val) onTitleChanged;
+  final Function(String val) onSubTitleChanged;
+  final bool editableText;
 
   static RectTween _createRectTween(Rect begin, Rect end) {
     return MaterialRectCenterArcTween(begin: begin, end: end);
@@ -52,7 +56,7 @@ class PlantHero extends StatelessWidget {
       height: height,
       child: Hero(
         createRectTween: _createRectTween,
-        tag: tag,
+        tag: "plant$index",
         child: CornerRadiusExpansion(
           maxRadius: width,
           child: Material(
@@ -68,10 +72,7 @@ class PlantHero extends StatelessWidget {
                   ),
                   blackFade(),
                   Container(
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.50,
+                    height: MediaQuery.of(context).size.height * 0.50,
                     padding: const EdgeInsets.only(left: 24.0, bottom: 24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,25 +80,9 @@ class PlantHero extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4.0),
-                          child: Text(
-                            title,
-                            style: TextStyle(
-                              fontFamily: 'AlegreyaSans',
-                              fontSize: 36,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          child: getTextWidget(title, onTitleChanged, 36, FontWeight.w700),
                         ),
-                        Text(
-                          subTitle,
-                          style: TextStyle(
-                            fontFamily: 'AlegreyaSans',
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        getTextWidget(subTitle, onSubTitleChanged, 20, FontWeight.w500),
                       ],
                     ),
                   )
@@ -108,6 +93,24 @@ class PlantHero extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  getTextWidget(String title, Function(String val) onChanged, double fontSize, FontWeight weight) {
+    var textStyle = TextStyle(
+      fontFamily: 'AlegreyaSans',
+      fontSize: fontSize,
+      color: Colors.white,
+      fontWeight: weight,
+    );
+    if (editableText) {
+      return new CustomEditableText(
+          text: title,
+          style: textStyle,
+          onChanged: onChanged
+      );
+    } else {
+      return Text(title, style: textStyle);
+    }
   }
 }
 

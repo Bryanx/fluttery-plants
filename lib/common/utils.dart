@@ -13,6 +13,8 @@ Iterable<E> mapIndexed<E, T>(
   }
 }
 
+typedef StringCallback = Function(String string);
+
 // Constants
 const DB_NAME = "Plant";
 

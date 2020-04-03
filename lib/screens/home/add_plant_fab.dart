@@ -22,7 +22,7 @@ class PlantFab extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) =>
-              PlantScreen(plant: store.plants[plantsCount], tag: "plant$plantsCount")
+              PlantScreen(plant: store.plants[plantsCount], index: plantsCount)
       ),
     );
   }
