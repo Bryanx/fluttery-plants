@@ -39,8 +39,8 @@ class ReminderCard extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: BackdropIcon(
-                      icon: Icon(icon,
-                          color: Colors.white),
+                      icon: Icon(icon, color: Colors.white),
+                      bgColor: ColorUtil.primaryColor,
                       onClick: null),
                 ),
                 Column(

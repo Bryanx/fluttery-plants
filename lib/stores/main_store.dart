@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/repository/repository_provider.dart';
+import 'package:fluttering_plants/screens/navigation/page.dart';
 import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:mobx/mobx.dart';
@@ -15,9 +16,8 @@ abstract class _MainStore with Store {
   final plantListStore = PlantListStore();
 
   @observable
-  int navigationIndex = 0;
+  Page currentPage = Page.Plants;
 
   @action
-  void setNavigationIndex(value) =>
-      navigationIndex = value;
+  void setCurrentPage(value) => currentPage = value;
 }

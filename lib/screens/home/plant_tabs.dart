@@ -13,7 +13,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
   ScrollController _scrollViewController;
   TabController _tabController;
   final selectedTabColor = ColorUtil.darken(ColorUtil.primaryColor, .2);
-  final unSelectedTabColor = ColorUtil.grey;
+  final unSelectedTabColor = ColorUtil.darken(ColorUtil.white, .3);
 
   @override
   void initState() {

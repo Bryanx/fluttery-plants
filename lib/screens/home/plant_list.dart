@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/home/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
@@ -15,8 +16,8 @@ import 'package:provider/provider.dart';
 class PlantList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final plantList = Provider.of<MainStore>(context).plantListStore;
-    plantList.fetch();
+    final plantListStore = Provider.of<MainStore>(context).plantListStore;
+    plantListStore.fetch();
     return Column(
       children: <Widget>[
         new Expanded(
@@ -24,29 +25,34 @@ class PlantList extends StatelessWidget {
             builder: (_) => ListView.builder(
                 padding: EdgeInsets.all(0.0),
                 scrollDirection: Axis.vertical,
-                itemCount: plantList.plants.length,
-                itemBuilder: (context, index) => Container(
-                    color: Colors.transparent,
-                    padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    child: PlantHero(
-                      tag: "plant$index",
-                      photo: plantList.plants[index].imgPath,
-                      height: 170.0,
-                      width: MediaQuery.of(context).size.width,
-                      title: plantList.plants[index].nickName,
-                      subTitle: plantList.plants[index].name,
-                      onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => PlantScreen(
-                                    plant: plantList.plants[index],
-                                    tag: "plant$index")),
-                          ),
+                itemCount: plantListStore.plants.length,
+                itemBuilder: (context, index) =>
+                    Container(
+                        color: Colors.transparent,
+                        padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                        child: getHero(plantListStore, index, context)
                     )
-                )
             ),
           ),
         ),
       ],
+    );
+  }
+
+  getHero(PlantListStore plantListStore, int index, BuildContext context) {
+    return PlantHero(
+      tag: "plant$index",
+      photo: plantListStore.plants[index].imgPath,
+      height: 170.0,
+      width: MediaQuery.of(context).size.width,
+      title: plantListStore.plants[index].nickName,
+      subTitle: plantListStore.plants[index].name,
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => PlantScreen(
+                plant: plantListStore.plants[index],
+                tag: "plant$index")),
+      ),
     );
   }
 }

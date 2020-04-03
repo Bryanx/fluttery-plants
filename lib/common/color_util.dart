@@ -5,7 +5,10 @@ import 'package:flutter/cupertino.dart';
 class ColorUtil {
   static final primaryColor = Color(0xFFADC688);
   static final accentColor = Color(0xFFADC688);
+  static final backgroundColor = Color(0xFFF5F6F3);
   static final grey = Color(0x4D21293A);
+  static final black = Color(0xFF000000);
+  static final white = Color(0xFFFFFFFF);
 
   static Color darken(Color color, [double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
