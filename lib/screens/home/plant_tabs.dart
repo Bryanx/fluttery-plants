@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/screens/home/plant_list.dart';
+import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
+import 'package:fluttering_plants/stores/main_store.dart';
+import 'package:provider/provider.dart';
 
 class PlantTabs extends StatefulWidget {
   const PlantTabs();
@@ -20,6 +23,11 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
     super.initState();
     _scrollViewController = ScrollController();
     _tabController = TabController(vsync: this, length: 2);
+  }
+
+  void onAfterTabDrag(int from, int to, MainStore store) {
+    if (from > to) store.settTabDragDirection(Direction.LEFT);
+    else store.settTabDragDirection(Direction.RIGHT);
   }
 
   @override
@@ -50,6 +58,11 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<MainStore>(context);
+    _tabController.addListener(() {
+      if(_tabController.index != _tabController.previousIndex)
+        onAfterTabDrag(_tabController.previousIndex, _tabController.index, store);
+    });
     return NestedScrollView(
       controller: _scrollViewController,
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

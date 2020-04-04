@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:simple_animations/simple_animations/controlled_animation.dart';
 import 'package:simple_animations/simple_animations/multi_track_tween.dart';
 
-class FadeInLeft extends StatelessWidget {
+class FadeInX extends StatelessWidget {
   final double delay;
   final Widget child;
+  final Direction direction;
 
-  FadeInLeft({this.delay = 0, this.child});
+  FadeInX({this.delay = 0, this.child, this.direction});
+
+  Animatable getXTween() {
+    if (direction == Direction.LEFT)
+      return Tween(begin: -130.0, end: 0.0);
+    else
+      return Tween(begin: 130.0, end: 0.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,7 @@ class FadeInLeft extends StatelessWidget {
       Track("opacity")
           .add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
       Track("translateX").add(
-          Duration(milliseconds: 500), Tween(begin: -130.0, end: 0.0),
+          Duration(milliseconds: 500), getXTween(),
           curve: Curves.easeOut)
     ]);
 

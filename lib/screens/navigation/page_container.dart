@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttering_plants/screens/animations/fade_in_right.dart';
 import 'package:fluttering_plants/screens/home/plant_tabs.dart';
 import 'package:fluttering_plants/screens/navigation/page.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations/controlled_animation.dart';
-import 'package:simple_animations/simple_animations/multi_track_tween.dart';
 
 ///
 /// Main content of the app.

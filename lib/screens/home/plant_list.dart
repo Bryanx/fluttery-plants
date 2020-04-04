@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/home/plant_card.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
@@ -16,7 +17,8 @@ import 'package:provider/provider.dart';
 class PlantList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final plantListStore = Provider.of<MainStore>(context).plantListStore;
+    final store = Provider.of<MainStore>(context);
+    final plantListStore = store.plantListStore;
     plantListStore.fetch();
     return Column(
       children: <Widget>[
@@ -27,10 +29,14 @@ class PlantList extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemCount: plantListStore.plants.length,
                 itemBuilder: (context, index) =>
-                    Container(
-                        color: Colors.transparent,
-                        padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                        child: getHero(plantListStore, index, context)
+                    FadeInX(
+                      direction: store.tabDragDirection,
+                      delay: 0.33*index,
+                      child: Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                          child: getHero(plantListStore, index, context)
+                      ),
                     )
             ),
           ),

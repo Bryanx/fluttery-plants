@@ -9,11 +9,14 @@ class ReminderCard extends StatelessWidget {
   final String subText;
   final icon;
   final String title;
-  final bgColor = ColorUtil.lighten(ColorUtil.primaryColor, .25);
-  final subTextColor = ColorUtil.darken(ColorUtil.primaryColor, .1);
-  final titleColor = ColorUtil.darken(ColorUtil.primaryColor, .25);
+  final bgColor;
+  final subTextColor;
+  final titleColor;
+  final color;
 
-  ReminderCard({this.icon, this.subText, this.title});
+  ReminderCard({this.icon, this.subText, this.title, this.bgColor, this.color})
+      : this.subTextColor = ColorUtil.darken(color, .1),
+        this.titleColor = ColorUtil.darken(color, .25);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class ReminderCard extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: BackdropIcon(
                       icon: Icon(icon, color: Colors.white),
-                      bgColor: ColorUtil.primaryColor,
+                      bgColor: color,
                       onClick: null),
                 ),
                 Column(

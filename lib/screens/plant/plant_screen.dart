@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/custom_icons.dart';
-import 'package:fluttering_plants/common/utils.dart';
 import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/screens/animations/fade_in_left_.dart';
-import 'package:fluttering_plants/screens/animations/fade_in_right.dart';
-import 'package:fluttering_plants/screens/home/plant_list.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
+import 'package:fluttering_plants/screens/common/fancy_fab.dart';
+import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
 import 'package:fluttering_plants/screens/plant/reminder_card.dart';
@@ -31,9 +30,7 @@ class PlantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<MainStore>(
         create: (_) => MainStore(),
-        child: new Scaffold(
-            backgroundColor: Colors.transparent,
-            body: _PlantScreen(plant, index)));
+        child: _PlantScreen(plant, index));
   }
 }
 
@@ -55,6 +52,8 @@ class _PlantScreen extends StatelessWidget {
 
     store.initState(plant);
     return Scaffold(
+      backgroundColor: ColorUtil.white,
+      floatingActionButton: FancyFab(),
       body: Column(
         children: <Widget>[
           Stack(
@@ -64,65 +63,69 @@ class _PlantScreen extends StatelessWidget {
             ],
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.white),
-            child: Container(
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          ReminderCard(
-                              icon: CustomIcons.drop,
-                              subText: "Water every",
-                              title: "waterDaysLeft"),
-                          ReminderCard(
-                              icon: CustomIcons.flash,
-                              subText: "Fertilize every",
-                              title: "fertilizerDaysLeft"),
-                        ],
-                      ),
-                    ),
-                    Row(
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Birthday, Room, Difficulty, Memo's, Time since last prune, Time since last fertilization, Actions: prune, water, fertilize, repot"
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: BackdropIcon(
-                              icon: Icon(Icons.delete_outline, color: ColorUtil.white),
-                              bgColor: ColorUtil.primaryColor,
-                              onClick: () {
-                                store.deletePlant();
-                                Navigator.pop(context);
-                              }),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: FutureBuilder<List<CameraDescription>>(
-                              future: availableCameras(),
-                              builder: (context,
-                                  AsyncSnapshot<
-                                      List<CameraDescription>> snapshot) =>
-                                  BackdropIcon(
-                                      icon: Icon(Icons.photo_camera,
-                                          color: ColorUtil.white),
-                                      bgColor: ColorUtil.primaryColor,
-                                      onClick: () =>
-                                      snapshot.connectionState ==
-                                          ConnectionState.done ? openCamera(
-                                          context, snapshot, store) : ""
-                                  )),
-                        ),
+                        ReminderCard(
+                            icon: CustomIcons.drop,
+                            subText: "Water every",
+                            title: "waterDaysLeft",
+                            bgColor: ColorUtil.backgroundColor,
+                            color: ColorUtil.lighten(ColorUtil.secondaryColor, .2)),
+                        ReminderCard(
+                            icon: CustomIcons.flash,
+                            subText: "Fertilize every",
+                            title: "fertilizerDaysLeft",
+                            bgColor: ColorUtil.backgroundColor,
+                            color: ColorUtil.primaryColor),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: BackdropIcon(
+                            icon: Icon(Icons.delete_outline, color: ColorUtil.white),
+                            bgColor: ColorUtil.primaryColor,
+                            onClick: () {
+                              store.deletePlant();
+                              Navigator.pop(context);
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: FutureBuilder<List<CameraDescription>>(
+                            future: availableCameras(),
+                            builder: (context,
+                                AsyncSnapshot<
+                                    List<CameraDescription>> snapshot) =>
+                                BackdropIcon(
+                                    icon: Icon(Icons.photo_camera,
+                                        color: ColorUtil.white),
+                                    bgColor: ColorUtil.primaryColor,
+                                    onClick: () =>
+                                    snapshot.connectionState ==
+                                        ConnectionState.done ? openCamera(
+                                        context, snapshot, store) : ""
+                                )),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
@@ -144,7 +147,8 @@ class _PlantScreen extends StatelessWidget {
   }
 
   getBackButton(BuildContext context) {
-    return FadeInLeft(
+    return FadeInX(
+      direction: Direction.LEFT,
       child: Align(
         alignment: Alignment.topLeft,
         child: SafeArea(

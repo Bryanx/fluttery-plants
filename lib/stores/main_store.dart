@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/repository/repository_provider.dart';
+import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/screens/navigation/page.dart';
 import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:fluttering_plants/stores/plant_store.dart';
@@ -18,6 +19,12 @@ abstract class _MainStore with Store {
   @observable
   Page currentPage = Page.Plants;
 
+  @observable
+  Direction tabDragDirection = Direction.LEFT;
+
   @action
   void setCurrentPage(value) => currentPage = value;
+
+  @action
+  void settTabDragDirection(value) => tabDragDirection = value;
 }
