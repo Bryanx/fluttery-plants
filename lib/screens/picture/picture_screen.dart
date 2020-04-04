@@ -75,17 +75,13 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             );
             developer.log("Attempting to take picture at path: $imgPath");
             await controller.takePicture(imgPath);
-            onTakePicture(context, imgPath);
             developer.log("Made picture at path: $imgPath");
+            Navigator.pop(context, imgPath);
           } catch (e) {
             print(e);
           }
         },
       ),
     );
-  }
-
-  onTakePicture(context, String imgPath) {
-    Navigator.pop(context, imgPath);
   }
 }

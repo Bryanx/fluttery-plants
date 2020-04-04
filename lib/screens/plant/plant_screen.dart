@@ -81,11 +81,11 @@ class _PlantScreen extends StatelessWidget {
                         children: <Widget>[
                           ReminderCard(
                               icon: CustomIcons.drop,
-                              subText: "Water",
+                              subText: "Water every",
                               title: "waterDaysLeft"),
                           ReminderCard(
                               icon: CustomIcons.flash,
-                              subText: "Fertilizer",
+                              subText: "Fertilize every",
                               title: "fertilizerDaysLeft"),
                         ],
                       ),
