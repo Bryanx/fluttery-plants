@@ -21,7 +21,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
-    controller = CameraController(widget.camera, ResolutionPreset.medium);
+    controller = CameraController(widget.camera, ResolutionPreset.max);
     initializeControllerFuture = controller.initialize();
   }
 
@@ -65,7 +65,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             await initializeControllerFuture;
             final imgPath = join(
               (await getApplicationDocumentsDirectory()).path,
-              '${DateTime.now()}.png',
+              '${getFileName()}.png',
             );
             await controller.takePicture(imgPath);
             onTakePicture(context, imgPath);
@@ -75,6 +75,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         },
       ),
     );
+  }
+
+  getFileName() {
+    DateTime.now()
+        .toString()
+        .replaceAll(" ", "-")
+        .replaceAll("-", "_")
+        .replaceAll(".", "_");
   }
 
   onTakePicture(context, String imgPath) {

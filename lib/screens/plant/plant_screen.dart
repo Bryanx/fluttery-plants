@@ -112,6 +112,7 @@ class _PlantScreen extends StatelessWidget {
                                   BackdropIcon(
                                       icon: Icon(Icons.photo_camera,
                                           color: ColorUtil.white),
+                                      bgColor: ColorUtil.primaryColor,
                                       onClick: () =>
                                       snapshot.connectionState ==
                                           ConnectionState.done ? openCamera(
@@ -131,15 +132,15 @@ class _PlantScreen extends StatelessWidget {
   }
 
   openCamera(context, snapshot, PlantStore store) async {
-    final imgPath =
-        await Navigator.push(context, MaterialPageRoute(builder: (context) {
+    final imgPath = await Navigator.push(context, MaterialPageRoute(builder: (context) {
       return TakePictureScreen(camera: snapshot.data.first);
     }));
     var oldFilePath = store.plant.imgPath;
     var plant = store.plant.copyWith(imgPath: imgPath);
     store.updatePlant(plant);
-    // delete old file.
-    File(oldFilePath).delete();
+    // delete old file if its not the placeholder
+    if (!oldFilePath.contains("sensevieria"))
+      File(oldFilePath).delete();
   }
 
   getBackButton(BuildContext context) {
@@ -160,25 +161,29 @@ class _PlantScreen extends StatelessWidget {
   }
 
   getHero(BuildContext context, PlantStore store) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: PlantHero(
-        index: index,
-        photo: store.plant.imgPath,
-        title: plant.nickName,
-        subTitle: plant.name,
-        editableText: true,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.50,
-        onTitleChanged: (value) {
-          plant.nickName = value;
-          store.updatePlant(plant);
-        },
-        onSubTitleChanged: (value) {
-          plant.name = value;
-          store.updatePlant(plant);
-        },
-      ),
+    return Observer(
+      builder: (_) {
+        return Align(
+          alignment: Alignment.topCenter,
+          child: PlantHero(
+            index: index,
+            photo: store.plant.imgPath,
+            title: plant.nickName,
+            subTitle: plant.name,
+            editableText: true,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.50,
+            onTitleChanged: (value) {
+              plant.nickName = value;
+              store.updatePlant(plant);
+            },
+            onSubTitleChanged: (value) {
+              plant.name = value;
+              store.updatePlant(plant);
+            },
+          ),
+        );
+      }
     );
   }
 }
