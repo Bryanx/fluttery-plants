@@ -161,29 +161,33 @@ class _PlantScreen extends StatelessWidget {
   }
 
   getHero(BuildContext context, PlantStore store) {
-    return Observer(
-      builder: (_) {
-        return Align(
-          alignment: Alignment.topCenter,
-          child: PlantHero(
-            index: index,
-            photo: store.plant.imgPath,
-            title: plant.nickName,
-            subTitle: plant.name,
-            editableText: true,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.50,
-            onTitleChanged: (value) {
-              plant.nickName = value;
-              store.updatePlant(plant);
-            },
-            onSubTitleChanged: (value) {
-              plant.name = value;
-              store.updatePlant(plant);
-            },
-          ),
-        );
-      }
+    return Align(
+      alignment: Alignment.topCenter,
+      child: PlantHero(
+        index: index,
+        photo: Observer(
+          builder: (_) {
+            return Image.asset(
+              store.plant.imgPath,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            );
+          }
+        ),
+        title: plant.nickName,
+        subTitle: plant.name,
+        editableText: true,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.50,
+        onTitleChanged: (value) {
+          plant.nickName = value;
+          store.updatePlant(plant);
+        },
+        onSubTitleChanged: (value) {
+          plant.name = value;
+          store.updatePlant(plant);
+        },
+      ),
     );
   }
 }

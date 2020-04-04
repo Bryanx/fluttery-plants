@@ -18,7 +18,7 @@ class PlantHero extends StatelessWidget {
     this.editableText = false})
       : super(key: key);
 
-  final String photo;
+  final Widget photo;
   final VoidCallback onTap;
   final double width;
   final double height;
@@ -65,11 +65,7 @@ class PlantHero extends StatelessWidget {
               onTap: onTap,
               child: Stack(
                 children: <Widget>[
-                  Image.asset(
-                    photo,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  photo,
                   blackFade(),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.50,

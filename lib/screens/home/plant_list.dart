@@ -42,7 +42,11 @@ class PlantList extends StatelessWidget {
   getHero(PlantListStore plantListStore, int index, BuildContext context) {
     var plant = plantListStore.plants[index];
     return PlantHero(
-      photo: plant.imgPath,
+      photo: Image.asset(
+        plant.imgPath,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
       height: 170.0,
       width: MediaQuery.of(context).size.width,
       title: plant.nickName,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -65,24 +66,23 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             await initializeControllerFuture;
             final imgPath = join(
               (await getApplicationDocumentsDirectory()).path,
-              '${getFileName()}.png',
+              '${DateTime.now()
+                  .toString()
+                  .replaceAll(" ", "-")
+                  .replaceAll("-", "_")
+                  .replaceAll(".", "_")
+                  .replaceAll(":", "_")}.png',
             );
+            developer.log("Attempting to take picture at path: $imgPath");
             await controller.takePicture(imgPath);
             onTakePicture(context, imgPath);
+            developer.log("Made picture at path: $imgPath");
           } catch (e) {
             print(e);
           }
         },
       ),
     );
-  }
-
-  getFileName() {
-    DateTime.now()
-        .toString()
-        .replaceAll(" ", "-")
-        .replaceAll("-", "_")
-        .replaceAll(".", "_");
   }
 
   onTakePicture(context, String imgPath) {
