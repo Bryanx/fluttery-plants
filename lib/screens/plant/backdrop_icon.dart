@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 class BackdropIcon extends StatelessWidget {
   final icon;
@@ -25,10 +23,8 @@ class BackdropIcon extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
-                      color: bgColor,
-                      borderRadius: BorderRadius.all(Radius.circular(12.0))
-                  ),
+                  decoration:
+                      BoxDecoration(color: bgColor, shape: BoxShape.circle),
                 ),
                 Center(
                   child: icon,

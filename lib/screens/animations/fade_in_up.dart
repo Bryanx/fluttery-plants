@@ -19,7 +19,7 @@ class FadeInUp extends StatelessWidget {
     ]);
 
     return ControlledAnimation(
-      delay: Duration(milliseconds: (300 * delay).round()),
+      delay: Duration(milliseconds: (delay).round()),
       duration: tween.duration,
       tween: tween,
       child: child,

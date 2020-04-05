@@ -6,16 +6,22 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/custom_icons.dart';
 import 'package:fluttering_plants/model/plant.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
+import 'package:fluttering_plants/screens/animations/plant_text_hero.dart';
+import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
 import 'package:fluttering_plants/screens/common/fancy_fab.dart';
 import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/screens/picture/picture_screen.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
+import 'package:fluttering_plants/screens/plant/plant_screen_sliding_up_body.dart';
+import 'package:fluttering_plants/screens/plant/plant_screen_sliding_up_panel.dart';
 import 'package:fluttering_plants/screens/plant/reminder_card.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 ///
 /// Single plant screen
@@ -41,109 +47,31 @@ class _PlantScreen extends StatelessWidget {
 
   _PlantScreen(this.plant, this.index);
 
-  Future onSelectNotification(context) async => await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => this),
-      );
-
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<MainStore>(context).plantStore;
-
     store.initState(plant);
+//    _pc.animatePanelToPosition(MediaQuery.of(context).size.height * 0.55);
     return Scaffold(
       backgroundColor: ColorUtil.white,
-      floatingActionButton: FancyFab(),
-      body: Column(
+      floatingActionButton: getFab(),
+      body: Stack(
         children: <Widget>[
-          Stack(
-            children: <Widget>[
-              getHero(context, store),
-              getBackButton(context)
-            ],
-          ),
-          Container(
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Birthday, Room, Difficulty, Memo's, Time since last prune, Time since last fertilization, Actions: prune, water, fertilize, repot"
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        ReminderCard(
-                            icon: CustomIcons.drop,
-                            subText: "Water every",
-                            title: "waterDaysLeft",
-                            bgColor: ColorUtil.backgroundColor,
-                            color: ColorUtil.lighten(ColorUtil.secondaryColor, .2)),
-                        ReminderCard(
-                            icon: CustomIcons.flash,
-                            subText: "Fertilize every",
-                            title: "fertilizerDaysLeft",
-                            bgColor: ColorUtil.backgroundColor,
-                            color: ColorUtil.primaryColor),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: BackdropIcon(
-                            icon: Icon(Icons.delete_outline, color: ColorUtil.white),
-                            bgColor: ColorUtil.primaryColor,
-                            onClick: () {
-                              store.deletePlant();
-                              Navigator.pop(context);
-                            }),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: FutureBuilder<List<CameraDescription>>(
-                            future: availableCameras(),
-                            builder: (context,
-                                AsyncSnapshot<
-                                    List<CameraDescription>> snapshot) =>
-                                BackdropIcon(
-                                    icon: Icon(Icons.photo_camera,
-                                        color: ColorUtil.white),
-                                    bgColor: ColorUtil.primaryColor,
-                                    onClick: () =>
-                                    snapshot.connectionState ==
-                                        ConnectionState.done ? openCamera(
-                                        context, snapshot, store) : ""
-                                )),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+          PlantScreenSlidingUpBody(plant: plant, index: index),
+          FadeInUp(
+            delay: 150,
+            child: SlidingUpPanel(
+              parallaxEnabled: true,
+              minHeight: MediaQuery.of(context).size.height * 0.50,
+              maxHeight: MediaQuery.of(context).size.height * 0.87,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
+              panel: PlantScreenSlidingUpPanel(),
             ),
           ),
+          getBackButton(context),
         ],
       ),
     );
-  }
-
-  openCamera(context, snapshot, PlantStore store) async {
-    final imgPath = await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return TakePictureScreen(camera: snapshot.data.first);
-    }));
-    var oldFilePath = store.plant.imgPath;
-    var plant = store.plant.copyWith(imgPath: imgPath);
-    store.updatePlant(plant);
-    // delete old file if its not the placeholder
-    if (!oldFilePath.contains("sensevieria"))
-      File(oldFilePath).delete();
   }
 
   getBackButton(BuildContext context) {
@@ -164,33 +92,22 @@ class _PlantScreen extends StatelessWidget {
     );
   }
 
-  getHero(BuildContext context, PlantStore store) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: PlantHero(
-        index: index,
-        photo: Observer(
-          builder: (_) {
-            return Image.asset(
-              store.plant.imgPath,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            );
-          }
+  getFab() {
+    return FloatingActionButton.extended(
+      onPressed: () => {},
+      tooltip: 'Submit a new note for this plant.',
+      elevation: 0.0,
+      backgroundColor: ColorUtil.primaryColor,
+      foregroundColor: ColorUtil.white,
+      label: Text(
+        "Add a note",
+        style: TextStyle(
+          fontFamily: 'AlegreyaSans',
+          fontSize: 17,
+          color: Colors.white,
+          letterSpacing: 0.5,
+          fontWeight: FontWeight.w500,
         ),
-        title: plant.nickName,
-        subTitle: plant.name,
-        editableText: true,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.50,
-        onTitleChanged: (value) {
-          plant.nickName = value;
-          store.updatePlant(plant);
-        },
-        onSubTitleChanged: (value) {
-          plant.name = value;
-          store.updatePlant(plant);
-        },
       ),
     );
   }

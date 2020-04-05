@@ -91,7 +91,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
             ),
             pinned: true,
             floating: true,
-            backgroundColor: Color(0xFFfafafa),
+            backgroundColor: ColorUtil.backgroundColor,
             forceElevated: innerBoxIsScrolled,
             bottom: createTabBar(),
           ),
