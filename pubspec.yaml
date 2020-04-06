@@ -14,7 +14,7 @@ description: Plants watering management
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -29,7 +29,7 @@ dependencies:
   flutter_mobx:
   sliding_up_panel: ^1.0.0
   camera:
-  provider:
+  provider: ^4.0.4
   flutter_local_notifications: ^0.8.2
   flutter_svg: ^0.17.3+1
   simple_animations: ^1.3.11
@@ -59,6 +59,8 @@ flutter:
     - assets/icons/farmer.svg
     - assets/icons/repot.svg
     - assets/icons/arrow.svg
+    - assets/icons/drop.svg
+    - assets/icons/thunderbolt.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

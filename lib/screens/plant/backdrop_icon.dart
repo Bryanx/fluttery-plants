@@ -9,27 +9,29 @@ class BackdropIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 50.0,
-      height: 50.0,
-      child: Container(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => onClick(),
-          splashColor: Colors.black87,
-          borderRadius: BorderRadius.circular(12.0),
-          child: SizedBox(
-            width: 50,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  decoration:
-                      BoxDecoration(color: bgColor, shape: BoxShape.circle),
-                ),
-                Center(
-                  child: icon,
-                ),
-              ],
+    return Material(
+      child: SizedBox(
+        width: 50.0,
+        height: 50.0,
+        child: Container(
+          color: bgColor,
+          child: InkWell(
+            onTap: () => onClick(),
+            splashColor: Colors.black87,
+            borderRadius: BorderRadius.circular(12.0),
+            child: SizedBox(
+              width: 50,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    decoration:
+                        BoxDecoration(color: bgColor, shape: BoxShape.circle),
+                  ),
+                  Center(
+                    child: icon,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

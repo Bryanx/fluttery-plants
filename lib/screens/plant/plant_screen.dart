@@ -1,75 +1,85 @@
-import 'dart:io';
+import 'dart:developer' as developer;
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttering_plants/common/color_util.dart';
-import 'package:fluttering_plants/common/custom_icons.dart';
-import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
-import 'package:fluttering_plants/screens/animations/plant_text_hero.dart';
-import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
-import 'package:fluttering_plants/screens/common/fancy_fab.dart';
-import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
-import 'package:fluttering_plants/screens/picture/picture_screen.dart';
+import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
-import 'package:fluttering_plants/screens/plant/plant_screen_sliding_up_body.dart';
-import 'package:fluttering_plants/screens/plant/plant_screen_sliding_up_panel.dart';
+import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
+import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
+import 'package:fluttering_plants/screens/plant/plant_screen_body.dart';
 import 'package:fluttering_plants/screens/plant/reminder_card.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
-import 'package:fluttering_plants/stores/plant_store.dart';
-import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 ///
 /// Single plant screen
 ///
+
 class PlantScreen extends StatelessWidget {
-  final Plant plant;
-  final index;
-
-  PlantScreen({this.plant, this.index});
-
-  @override
-  Widget build(BuildContext context) {
-    return Provider<MainStore>(
-        create: (_) => MainStore(),
-        child: _PlantScreen(plant, index));
-  }
-}
-
-class _PlantScreen extends StatelessWidget {
   final days = List<int>.generate(60, (i) => i += 1);
-  final index;
-  final plant;
-
-  _PlantScreen(this.plant, this.index);
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MainStore>(context).plantStore;
-    store.initState(plant);
-//    _pc.animatePanelToPosition(MediaQuery.of(context).size.height * 0.55);
+    final store = Provider.of<MainStore>(context);
+    developer.log("Plants: ${store.plantListStore.plants.length}");
+    final plant = store.plantListStore.plants[store.currentPlantIndex];
     return Scaffold(
       backgroundColor: ColorUtil.white,
       floatingActionButton: getFab(),
-      body: Stack(
-        children: <Widget>[
-          PlantScreenSlidingUpBody(plant: plant, index: index),
-          FadeInUp(
-            delay: 150,
-            child: SlidingUpPanel(
-              parallaxEnabled: true,
-              minHeight: MediaQuery.of(context).size.height * 0.50,
-              maxHeight: MediaQuery.of(context).size.height * 0.87,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
-              panel: PlantScreenSlidingUpPanel(),
-            ),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Stack(
+            children: <Widget>[
+              Align(
+                child: Hero(
+                  tag: "body${store.currentPlantIndex}",
+                  child: PlantScreenBody(),
+                ),
+              ),
+              PlantBodyHero(
+                tag: "stats${store.currentPlantIndex}",
+                child: Container(
+                  height: 510,
+                  padding: EdgeInsets.only(top: 220.0 + 24.0, right: 24, left: 24, bottom: 36),
+                  decoration: BoxDecoration(
+                      color: ColorUtil.black.withOpacity(.1),
+                      borderRadius: BorderRadius.all(Radius.circular(24.0))),
+                  child: Column(
+                    children: <Widget>[
+                      ReminderCard(
+                        icon: SvgPicture.asset("assets/icons/drop.svg", height: 60, color: ColorUtil.white),
+                        title: "Tomorrow",
+                        subText: "Needs water",
+                        color: ColorUtil.primaryColor,
+                      ),
+                      ReminderCard(
+                        icon: SvgPicture.asset("assets/icons/thunderbolt.svg", height: 60, color: ColorUtil.white),
+                        title: "51 days",
+                        subText: "Needs fertilizer in",
+                        margin: EdgeInsets.only(top: 24),
+                        color: ColorUtil.primaryColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              PlantHero(
+                index: store.currentPlantIndex,
+                width: MediaQuery.of(context).size.width,
+                height: 220,
+                title: plant.nickName,
+                subTitle: plant.name,
+                imgPath: plant.imgPath,
+                editableText: true,
+              ),
+              getBackButton(context),
+            ],
           ),
-          getBackButton(context),
-        ],
+        ),
       ),
     );
   }
@@ -97,14 +107,14 @@ class _PlantScreen extends StatelessWidget {
       onPressed: () => {},
       tooltip: 'Submit a new note for this plant.',
       elevation: 0.0,
-      backgroundColor: ColorUtil.primaryColor,
-      foregroundColor: ColorUtil.white,
+      backgroundColor: ColorUtil.white,
+      foregroundColor: ColorUtil.primaryColor,
       label: Text(
         "Add a note",
         style: TextStyle(
           fontFamily: 'AlegreyaSans',
           fontSize: 17,
-          color: Colors.white,
+          color: ColorUtil.primaryColor,
           letterSpacing: 0.5,
           fontWeight: FontWeight.w500,
         ),

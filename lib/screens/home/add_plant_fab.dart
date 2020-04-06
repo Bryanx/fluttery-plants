@@ -16,20 +16,16 @@ class PlantFab extends StatelessWidget {
   final plusColor = ColorUtil.white;
   final splashColor = ColorUtil.lighten(ColorUtil.primaryColor, .1);
 
-  Future onClick(PlantListStore store, BuildContext context) async {
-    var plantsCount = store.plants.length;
-    await store.add(Plant(nickName: "New plant"));
-    Navigator.of(context).push(
-      MaterialPageRoute(
-          builder: (context) =>
-              PlantScreen(plant: store.plants[plantsCount], index: plantsCount)
-      ),
-    );
+  Future onClick(MainStore store, BuildContext context) async {
+    var plantsCount = store.plantListStore.plants.length;
+    await store.plantListStore.add(Plant(nickName: "New plant"));
+    store.setCurrentPlantIndex(plantsCount);
+    Navigator.of(context).pushNamed("/plant");
   }
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MainStore>(context).plantListStore;
+    final store = Provider.of<MainStore>(context);
     return FadeInScale(
       child: Container(
         margin: EdgeInsets.only(bottom: 36.0),

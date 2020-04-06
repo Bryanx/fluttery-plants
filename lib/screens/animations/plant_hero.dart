@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/screens/animations/plant_text_hero.dart';
 
 ///
 /// Contains the hero animation.
@@ -10,38 +12,43 @@ import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
 /// the cornerradius is removed
 ///
 class PlantHero extends StatelessWidget {
-  const PlantHero({Key key,
-    this.index,
-    this.photo,
-    this.width,
-    this.height})
+  const PlantHero(
+      {Key key,
+      this.index,
+      this.width,
+      this.title,
+      this.subTitle,
+      this.imgPath,
+      this.editableText,
+      this.height})
       : super(key: key);
 
-  final Widget photo;
   final double width;
   final double height;
   final int index;
-
-  static RectTween _createRectTween(Rect begin, Rect end) {
-    return MaterialRectCenterArcTween(begin: begin, end: end);
-  }
+  final String title;
+  final String subTitle;
+  final String imgPath;
+  final bool editableText;
 
   Widget build(BuildContext context) {
     return Hero(
-      createRectTween: _createRectTween,
       tag: "plant$index",
-      child: SizedBox(
+      child: Container(
         width: width,
         height: height,
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: ClipRect(
-              child: photo,
-            ),
-          ),
-        ),
+        padding: EdgeInsets.all(25.0),
+        decoration: BoxDecoration(
+            color: ColorUtil.white,
+            borderRadius: BorderRadius.all(Radius.circular(24.0))),
+        child:
+            Row(crossAxisAlignment: CrossAxisAlignment.end, children: <Widget>[
+          ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(24.0)),
+              child: Image.asset(imgPath,
+                  fit: BoxFit.cover, width: 90, height: 90)),
+          PlantTextHero(editableText: false, title: title, subTitle: subTitle)
+        ]),
       ),
     );
   }

@@ -20,6 +20,9 @@ abstract class _MainStore with Store {
   Page currentPage = Page.Plants;
 
   @observable
+  int currentPlantIndex = 0;
+
+  @observable
   Direction tabDragDirection = Direction.LEFT;
 
   @action
@@ -27,4 +30,7 @@ abstract class _MainStore with Store {
 
   @action
   void settTabDragDirection(value) => tabDragDirection = value;
+
+  @action
+  void setCurrentPlantIndex(value) => currentPlantIndex = value;
 }

@@ -12,6 +12,7 @@ class ColorUtil {
   static final headerColor = Color(0xFF7B7B7B);
   static final black = Color(0xFF000000);
   static final white = Color(0xFFFFFFFF);
+  static final red = Color(0xFFFF6368);
 
   static Color darken(Color color, [double amount = .1]) {
     assert(amount >= 0 && amount <= 1);

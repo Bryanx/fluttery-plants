@@ -18,18 +18,15 @@ import 'add_plant_fab.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<MainStore>(
-      create: (_) => MainStore(),
-      child: new Scaffold(
-        body: Stack(
-          children: <Widget>[
-            PageContainer(),
-            NavigationBar(),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: PlantFab(),
+    return new Scaffold(
+      body: Stack(
+        children: <Widget>[
+          PageContainer(),
+          NavigationBar(),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: PlantFab(),
     );
   }
 }

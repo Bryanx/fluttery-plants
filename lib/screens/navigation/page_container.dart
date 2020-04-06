@@ -14,8 +14,6 @@ import 'package:provider/provider.dart';
 /// 
 class PageContainer extends StatelessWidget {
 
-  var watering = Container(color: Colors.red);
-
   @override
   Widget build(BuildContext context) {
     final mainStore = Provider.of<MainStore>(context);
