@@ -75,6 +75,12 @@ class PlantScreen extends StatelessWidget {
                 subTitle: plant.name,
                 imgPath: plant.imgPath,
                 editableText: true,
+                onTitleChanged: (val) {
+                  store.plantListStore.update(plant.copyWith(nickName: val));
+                },
+                onSubTitleChanged: (val) {
+                  store.plantListStore.update(plant.copyWith(name: val));
+                },
               ),
               getBackButton(context),
             ],

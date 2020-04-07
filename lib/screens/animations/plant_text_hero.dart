@@ -20,20 +20,18 @@ class PlantTextHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(bottom: 4.0, left: 20),
-          child: getTextWidget(title, onTitleChanged, 36, FontWeight.w500,
+    return Container(
+      padding: const EdgeInsets.only(left: 16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          getTextWidget(title, onTitleChanged, 36, FontWeight.w500,
               ColorUtil.headerColor),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 4.0),
-          child: getTextWidget(subTitle, onSubTitleChanged, 20, FontWeight.w500,
+          getTextWidget(subTitle, onSubTitleChanged, 20, FontWeight.w500,
               ColorUtil.lighten(ColorUtil.headerColor, .25)),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -46,7 +44,7 @@ class PlantTextHero extends StatelessWidget {
       fontWeight: weight,
     );
     if (editableText) {
-      return new CustomEditableText(
+      return CustomEditableText(
           text: title, style: textStyle, onChanged: onChanged);
     } else {
       return Text(title, style: textStyle);

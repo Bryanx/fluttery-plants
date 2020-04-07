@@ -12,6 +12,16 @@ import 'package:fluttering_plants/screens/animations/plant_text_hero.dart';
 /// the cornerradius is removed
 ///
 class PlantHero extends StatelessWidget {
+  final double width;
+  final double height;
+  final int index;
+  final String title;
+  final String subTitle;
+  final String imgPath;
+  final bool editableText;
+  final Function(String val) onTitleChanged;
+  final Function(String val) onSubTitleChanged;
+
   const PlantHero(
       {Key key,
       this.index,
@@ -20,16 +30,10 @@ class PlantHero extends StatelessWidget {
       this.subTitle,
       this.imgPath,
       this.editableText,
-      this.height})
+      this.height,
+      this.onTitleChanged,
+      this.onSubTitleChanged})
       : super(key: key);
-
-  final double width;
-  final double height;
-  final int index;
-  final String title;
-  final String subTitle;
-  final String imgPath;
-  final bool editableText;
 
   Widget build(BuildContext context) {
     return Hero(
@@ -47,7 +51,15 @@ class PlantHero extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(24.0)),
               child: Image.asset(imgPath,
                   fit: BoxFit.cover, width: 90, height: 90)),
-          PlantTextHero(editableText: false, title: title, subTitle: subTitle)
+          Flexible(
+            child: PlantTextHero(
+              editableText: editableText,
+              title: title,
+              subTitle: subTitle,
+              onTitleChanged: onTitleChanged,
+              onSubTitleChanged: onSubTitleChanged,
+            ),
+          )
         ]),
       ),
     );

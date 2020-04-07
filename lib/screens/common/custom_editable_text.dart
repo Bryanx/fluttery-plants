@@ -12,7 +12,8 @@ class CustomEditableText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EditableText(
+    return Flexible(
+        child: EditableText(
       backgroundCursorColor: ColorUtil.primaryColor,
       cursorColor: ColorUtil.primaryColor,
       maxLines: 1,
@@ -20,6 +21,6 @@ class CustomEditableText extends StatelessWidget {
       onChanged: onChanged,
       style: style,
       focusNode: FocusNode(),
-    );
+    ));
   }
 }
