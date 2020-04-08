@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 
 class PlantNotes extends StatelessWidget {
   final margin;

@@ -1,8 +1,10 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
@@ -28,81 +30,84 @@ class PlantScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorUtil.white,
       floatingActionButton: getFab(),
+      appBar: AppBar(
+        leading: getBackButton(context),
+        backgroundColor: ColorUtil.white,
+        elevation: 0.0,
+        actions: <Widget>[
+          getMenu(),
+        ],
+      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Stack(
-            children: <Widget>[
-              Align(
-                child: Hero(
-                  tag: "body${store.currentPlantIndex}",
-                  child: PlantScreenBody(),
-                ),
-              ),
-              PlantBodyHero(
-                tag: "stats${store.currentPlantIndex}",
-                child: Container(
-                  height: 510,
-                  padding: EdgeInsets.only(top: 220.0 + 24.0, right: 24, left: 24, bottom: 36),
-                  decoration: BoxDecoration(
-                      color: ColorUtil.black.withOpacity(.1),
-                      borderRadius: BorderRadius.all(Radius.circular(24.0))),
-                  child: Column(
-                    children: <Widget>[
-                      ReminderCard(
-                        icon: SvgPicture.asset("assets/icons/drop.svg", height: 60, color: ColorUtil.white),
-                        title: "Tomorrow",
-                        subText: "Needs water",
-                        color: ColorUtil.primaryColor,
-                      ),
-                      ReminderCard(
-                        icon: SvgPicture.asset("assets/icons/thunderbolt.svg", height: 60, color: ColorUtil.white),
-                        title: "51 days",
-                        subText: "Needs fertilizer in",
-                        margin: EdgeInsets.only(top: 24),
-                        color: ColorUtil.primaryColor,
-                      ),
-                    ],
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                    child: Hero(
+                      tag: "body${store.currentPlantIndex}",
+                      child: PlantScreenBody(),
+                    ),
                   ),
-                ),
+                  PlantBodyHero(
+                    tag: "stats${store.currentPlantIndex}",
+                    child: Container(
+                      height: 460,
+                      padding: EdgeInsets.only(
+                          top: 170.0 + 24.0,
+                          right: DimenUtil.defaultMargin,
+                          left: DimenUtil.defaultMargin,
+                          bottom: 36),
+                      decoration: BoxDecoration(
+                          color: ColorUtil.black.withOpacity(.1),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(DimenUtil.defaultRadius))),
+                      child: Column(
+                        children: <Widget>[
+                          ReminderCard(
+                            icon: SvgPicture.asset("assets/icons/drop.svg",
+                                height: 60, color: ColorUtil.white),
+                            title: "Tomorrow",
+                            subText: "Needs water",
+                            color: ColorUtil.primaryColor,
+                          ),
+                          ReminderCard(
+                            icon: SvgPicture.asset(
+                                "assets/icons/thunderbolt.svg",
+                                height: 60,
+                                color: ColorUtil.white),
+                            title: "51 days",
+                            subText: "Needs fertilizer in",
+                            margin: EdgeInsets.only(top: 24),
+                            color: ColorUtil.primaryColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  PlantHero(
+                    index: store.currentPlantIndex,
+                    width: MediaQuery.of(context).size.width,
+                    height: 170,
+                    title: plant.nickName,
+                    subTitle: plant.name,
+                    imgPath: plant.imgPath,
+                    editable: true,
+                    onTitleChanged: (val) {
+                      store.plantListStore
+                          .update(plant.copyWith(nickName: val));
+                    },
+                    onSubTitleChanged: (val) {
+                      store.plantListStore.update(plant.copyWith(name: val));
+                    },
+                  ),
+                ],
               ),
-              PlantHero(
-                index: store.currentPlantIndex,
-                width: MediaQuery.of(context).size.width,
-                height: 220,
-                title: plant.nickName,
-                subTitle: plant.name,
-                imgPath: plant.imgPath,
-                editableText: true,
-                onTitleChanged: (val) {
-                  store.plantListStore.update(plant.copyWith(nickName: val));
-                },
-                onSubTitleChanged: (val) {
-                  store.plantListStore.update(plant.copyWith(name: val));
-                },
-              ),
-              getBackButton(context),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  getBackButton(BuildContext context) {
-    return FadeInX(
-      direction: Direction.LEFT,
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 24.0, top: 16.0),
-            child: BackdropIcon(
-                icon: Icon(Icons.arrow_back, color: ColorUtil.primaryColor),
-                bgColor: ColorUtil.white,
-                onClick: () => Navigator.of(context).pop()),
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -123,6 +128,45 @@ class PlantScreen extends StatelessWidget {
           color: ColorUtil.primaryColor,
           letterSpacing: 0.5,
           fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  getBackButton(BuildContext context) {
+    return FadeInX(
+      direction: Direction.LEFT,
+      child: Padding(
+        padding: const EdgeInsets.only(left: DimenUtil.defaultMargin),
+        child: BackdropIcon(
+            icon: RotatedBox(
+              quarterTurns: 2,
+              child: SvgPicture.asset("assets/icons/arrow.svg",
+                  height: 22, color: ColorUtil.primaryColor),
+            ),
+            onClick: () => Navigator.of(context).pop()),
+      ),
+    );
+  }
+
+  Widget getMenu() {
+    return FadeInX(
+      direction: Direction.RIGHT,
+      child: Padding(
+        padding: const EdgeInsets.only(right: DimenUtil.defaultMargin - 15),
+        child: PopupMenuButton<int>(
+          icon: SvgPicture.asset("assets/icons/menu2.svg",
+              height: 10, color: ColorUtil.primaryColor),
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 1,
+              child: Text("First"),
+            ),
+            PopupMenuItem(
+              value: 2,
+              child: Text("Second"),
+            ),
+          ],
         ),
       ),
     );

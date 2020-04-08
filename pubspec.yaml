@@ -61,6 +61,7 @@ flutter:
     - assets/icons/arrow.svg
     - assets/icons/drop.svg
     - assets/icons/thunderbolt.svg
+    - assets/icons/menu2.svg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

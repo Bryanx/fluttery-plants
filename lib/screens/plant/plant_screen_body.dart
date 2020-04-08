@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/custom_icons.dart';
+import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
@@ -37,7 +38,7 @@ class PlantScreenBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 510.0, left: 24, right: 24, bottom: 24),
+            padding: const EdgeInsets.only(top: 460.0, left: DimenUtil.defaultMargin, right: DimenUtil.defaultMargin, bottom: 24),
             child: PlantNotes(
               margin: EdgeInsets.only(top: 24)
             ),
@@ -52,7 +53,6 @@ class PlantScreenBody extends StatelessWidget {
                     BackdropIcon(
                         icon: Icon(Icons.photo_camera,
                             color: ColorUtil.white),
-                        bgColor: ColorUtil.primaryColor,
                         onClick: () => snapshot.connectionState ==
                                 ConnectionState.done
                             ? openCamera(context, snapshot, store.plantStore)

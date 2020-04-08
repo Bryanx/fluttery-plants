@@ -3,16 +3,16 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class ColorUtil {
-  static final primaryColor = Color(0xFFA6C688);
-  static final secondaryColor = Color(0xFF30738E);
-  static final accentColor = Color(0xFFA6C688);
-  static final backgroundColor = Color(0xFFF5F6F3);
-  static final grey = Color(0x4D21293A);
-  static final solidGrey = Color(0xFFDBDBDB);
-  static final headerColor = Color(0xFF7B7B7B);
-  static final black = Color(0xFF000000);
-  static final white = Color(0xFFFFFFFF);
-  static final red = Color(0xFFFF6368);
+  static const primaryColor = Color(0xFFA6C688);
+  static const secondaryColor = Color(0xFF30738E);
+  static const accentColor = Color(0xFFA6C688);
+  static const backgroundColor = Color(0xFFF5F6F3);
+  static const grey = Color(0x4D21293A);
+  static const solidGrey = Color(0xFFDBDBDB);
+  static const headerColor = Color(0xFF7B7B7B);
+  static const black = Color(0xFF000000);
+  static const white = Color(0xFFFFFFFF);
+  static const red = Color(0xFFFF6368);
 
   static Color darken(Color color, [double amount = .1]) {
     assert(amount >= 0 && amount <= 1);

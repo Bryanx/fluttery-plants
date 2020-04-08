@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/common/dimen_util.dart';
 
 ///
 /// Small card with a reminder and an icon.
@@ -26,7 +27,7 @@ class ReminderCard extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          borderRadius: BorderRadius.all(Radius.circular(DimenUtil.defaultRadius - 4))),
       child: Row(
         children: <Widget>[
           Container(

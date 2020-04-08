@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/screens/animations/plant_text_hero.dart';
 
 ///
@@ -18,7 +19,7 @@ class PlantHero extends StatelessWidget {
   final String title;
   final String subTitle;
   final String imgPath;
-  final bool editableText;
+  final bool editable;
   final Function(String val) onTitleChanged;
   final Function(String val) onSubTitleChanged;
 
@@ -29,7 +30,7 @@ class PlantHero extends StatelessWidget {
       this.title,
       this.subTitle,
       this.imgPath,
-      this.editableText,
+      this.editable,
       this.height,
       this.onTitleChanged,
       this.onSubTitleChanged})
@@ -41,19 +42,22 @@ class PlantHero extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.all(editable ? DimenUtil.defaultMargin : 25.0),
         decoration: BoxDecoration(
             color: ColorUtil.white,
-            borderRadius: BorderRadius.all(Radius.circular(24.0))),
+            borderRadius: BorderRadius.vertical(
+                top: Radius.circular(editable ? 0 : DimenUtil.defaultRadius),
+                bottom: Radius.circular(DimenUtil.defaultRadius))
+        ),
         child:
             Row(crossAxisAlignment: CrossAxisAlignment.end, children: <Widget>[
           ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(24.0)),
+              borderRadius: BorderRadius.all(Radius.circular(DimenUtil.defaultRadius - 4)),
               child: Image.asset(imgPath,
                   fit: BoxFit.cover, width: 90, height: 90)),
           Flexible(
             child: PlantTextHero(
-              editableText: editableText,
+              editableText: editable,
               title: title,
               subTitle: subTitle,
               onTitleChanged: onTitleChanged,

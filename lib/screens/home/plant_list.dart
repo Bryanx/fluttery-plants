@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttering_plants/common/color_util.dart';
+import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
@@ -53,7 +54,7 @@ class PlantList extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: ColorUtil.primaryColor,
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(24.0))),
+                                    BorderRadius.all(Radius.circular(DimenUtil.defaultRadius))),
                               ),
                             ),
                           ),
@@ -70,7 +71,7 @@ class PlantList extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: ColorUtil.black.withOpacity(.1),
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(24.0))),
+                                    BorderRadius.all(Radius.circular(DimenUtil.defaultRadius))),
                               ),
                             ),
                           ),
@@ -81,7 +82,7 @@ class PlantList extends StatelessWidget {
                             title: plantListStore.plants[index].nickName,
                             subTitle: plantListStore.plants[index].name,
                             imgPath: plantListStore.plants[index].imgPath,
-                            editableText: false,
+                            editable: false,
                           ),
                         ],
                       ),
