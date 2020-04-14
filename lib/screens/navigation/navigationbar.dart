@@ -44,7 +44,7 @@ class NavigationBar extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Observer(
         builder: (_) => BottomNavigationBar(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorUtil.navigationBarColor,
           iconSize: iconSize,
           elevation: 0.0,
           currentIndex: mainStore.currentPage.index,
@@ -65,91 +65,5 @@ class NavigationBar extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void showAddModal(BuildContext context, PlantListStore plantList) {
-    showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          context: context,
-          builder: (builder) {
-            return Container(
-              color: Colors.transparent,
-              child: new Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: new Container(
-                  height: 230,
-                  decoration: new BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(10.0),
-                          topRight: const Radius.circular(10.0))),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 15, top: 25.0, right: 15, bottom: 30),
-                    child: ListView(
-                      children: <Widget>[
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: TextFormField(
-                                controller: plantNameController,
-                                textInputAction: TextInputAction.done,
-                                style: TextStyle(
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.w400),
-                                autofocus: true,
-                                decoration: const InputDecoration(
-                                    hintText: 'Give your plant a name.',
-                                    labelText: 'New Plant',
-                                    labelStyle: TextStyle(
-                                        color: Colors.indigoAccent,
-                                        fontWeight: FontWeight.w500)),
-                                validator: (String value) {
-                                  if (value.isEmpty) {
-                                    return 'Empty name!';
-                                  }
-                                  return value.contains('')
-                                      ? 'Do not use the @ char.'
-                                      : null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 5, top: 15),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.indigoAccent,
-                                radius: 18,
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.save,
-                                    size: 22,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    final newPlant = Plant(
-                                        nickName:
-                                        plantNameController.value.text);
-                                    if (newPlant.name.isNotEmpty) {
-                                      plantList.add(newPlant);
-                                      Navigator.pop(context);
-                                    }
-                                  },
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          });
   }
 }

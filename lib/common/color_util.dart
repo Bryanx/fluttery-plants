@@ -7,6 +7,7 @@ class ColorUtil {
   static const secondaryColor = Color(0xFF30738E);
   static const accentColor = Color(0xFFA6C688);
   static const backgroundColor = Color(0xFFF5F6F3);
+  static const navigationBarColor = Color(0xFFFAFBF9);
   static const grey = Color(0x4D21293A);
   static const solidGrey = Color(0xFFDBDBDB);
   static const headerColor = Color(0xFF7B7B7B);

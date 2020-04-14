@@ -79,4 +79,18 @@ abstract class _Plant extends Equatable with Store {
     this.waterStart = DateTime.now().millisecondsSinceEpoch;
     this.fertilizerStart = DateTime.now().millisecondsSinceEpoch;
   }
+
+  @override
+  String toString() {
+    return "{"
+        "\tid: $id,\n" +
+        "\tname: $name,\n" +
+        "\tnickName: $nickName,\n" +
+        "\timgPath: $imgPath,\n" +
+        "\twaterInterval: $waterInterval,\n" +
+        "\tfertilizerInterval: $fertilizerInterval,\n" +
+        "\twaterStart: $waterStart,\n" +
+        "\tfertilizerStart: $fertilizerStart,\n" +
+        "}";
+  }
 }

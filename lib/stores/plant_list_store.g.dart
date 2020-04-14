@@ -46,4 +46,18 @@ mixin _$PlantListStore on _PlantListStore, Store {
   Future<dynamic> fetch() {
     return _$fetchAsyncAction.run(() => super.fetch());
   }
+
+  final _$deleteAsyncAction = AsyncAction('delete');
+
+  @override
+  Future<dynamic> delete(Plant plant) {
+    return _$deleteAsyncAction.run(() => super.delete(plant));
+  }
+
+  final _$findAsyncAction = AsyncAction('find');
+
+  @override
+  Future<dynamic> find(Plant plant) {
+    return _$findAsyncAction.run(() => super.find(plant));
+  }
 }

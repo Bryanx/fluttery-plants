@@ -1,10 +1,9 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/dimen_util.dart';
+import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
@@ -13,6 +12,7 @@ import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen_body.dart';
 import 'package:fluttering_plants/screens/plant/reminder_card.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
+import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:provider/provider.dart';
 
 ///
@@ -25,8 +25,8 @@ class PlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<MainStore>(context);
-    developer.log("Plants: ${store.plantListStore.plants.length}");
-    final plant = store.plantListStore.plants[store.currentPlantIndex];
+    var plantStore = store.plantListStore;
+    final plant = plantStore.plants[store.currentPlantIndex];
     return Scaffold(
       backgroundColor: ColorUtil.white,
       floatingActionButton: getFab(),
@@ -35,7 +35,7 @@ class PlantScreen extends StatelessWidget {
         backgroundColor: ColorUtil.white,
         elevation: 0.0,
         actions: <Widget>[
-          getMenu(),
+          getMenu(plantStore, plant, context),
         ],
       ),
       body: SizedBox(
@@ -46,11 +46,9 @@ class PlantScreen extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(),
               child: Stack(
                 children: <Widget>[
-                  Align(
-                    child: Hero(
-                      tag: "body${store.currentPlantIndex}",
-                      child: PlantScreenBody(),
-                    ),
+                  Hero(
+                    tag: "body${store.currentPlantIndex}",
+                    child: PlantScreenBody(),
                   ),
                   PlantBodyHero(
                     tag: "stats${store.currentPlantIndex}",
@@ -97,11 +95,10 @@ class PlantScreen extends StatelessWidget {
                     imgPath: plant.imgPath,
                     editable: true,
                     onTitleChanged: (val) {
-                      store.plantListStore
-                          .update(plant.copyWith(nickName: val));
+                      plantStore.update(plant.copyWith(nickName: val));
                     },
                     onSubTitleChanged: (val) {
-                      store.plantListStore.update(plant.copyWith(name: val));
+                      plantStore.update(plant.copyWith(name: val));
                     },
                   ),
                 ],
@@ -149,22 +146,38 @@ class PlantScreen extends StatelessWidget {
     );
   }
 
-  Widget getMenu() {
+  Widget getMenu(PlantListStore plantStore, Plant plant, BuildContext context) {
+    var textStyle = TextStyle(
+      fontFamily: 'AlegreyaSans',
+      fontSize: 20,
+      color: ColorUtil.headerColor,
+      letterSpacing: 0.5,
+      fontWeight: FontWeight.w500,
+    );
     return FadeInX(
       direction: Direction.RIGHT,
       child: Padding(
         padding: const EdgeInsets.only(right: DimenUtil.defaultMargin - 15),
         child: PopupMenuButton<int>(
+          onSelected: (result) {
+            switch (result) {
+              case 1: break;
+              case 2: {
+                plantStore.delete(plant);
+                Navigator.of(context).pop();
+              } break;
+            }
+          },
           icon: SvgPicture.asset("assets/icons/menu2.svg",
               height: 10, color: ColorUtil.primaryColor),
           itemBuilder: (context) => [
             PopupMenuItem(
               value: 1,
-              child: Text("First"),
+              child: Text("Move to cemetery", style: textStyle),
             ),
             PopupMenuItem(
               value: 2,
-              child: Text("Second"),
+              child: Text("Delete this plant", style: textStyle),
             ),
           ],
         ),
