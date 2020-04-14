@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:fluttering_plants/model/plant.dart';
-import 'package:fluttering_plants/repository/repository_provider.dart';
 import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/screens/navigation/page.dart';
 import 'package:fluttering_plants/stores/plant_list_store.dart';

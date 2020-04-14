@@ -60,4 +60,17 @@ mixin _$PlantListStore on _PlantListStore, Store {
   Future<dynamic> find(Plant plant) {
     return _$findAsyncAction.run(() => super.find(plant));
   }
+
+  final _$_PlantListStoreActionController =
+      ActionController(name: '_PlantListStore');
+
+  @override
+  Plant findNullable(Plant plant) {
+    final _$actionInfo = _$_PlantListStoreActionController.startAction();
+    try {
+      return super.findNullable(plant);
+    } finally {
+      _$_PlantListStoreActionController.endAction(_$actionInfo);
+    }
+  }
 }

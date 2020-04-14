@@ -82,7 +82,7 @@ abstract class _Plant extends Equatable with Store {
 
   @override
   String toString() {
-    return "{"
+    return "{\n"
         "\tid: $id,\n" +
         "\tname: $name,\n" +
         "\tnickName: $nickName,\n" +

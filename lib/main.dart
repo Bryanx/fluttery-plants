@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
+import 'package:logger/logger.dart';
 
 import 'common/app_theme.dart';
 
@@ -20,6 +21,7 @@ void main() {
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 //  debugPaintSizeEnabled = true;
   timeDilation = 1.0;
+  Logger.level = Level.verbose; //remove this line for prod.
   runApp(Provider<MainStore>(
       create: (_) => MainStore(),
       child: MaterialApp(

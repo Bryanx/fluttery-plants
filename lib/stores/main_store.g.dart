@@ -26,6 +26,40 @@ mixin _$MainStore on _MainStore, Store {
     }, _$currentPageAtom, name: '${_$currentPageAtom.name}_set');
   }
 
+  final _$currentPlantIndexAtom = Atom(name: '_MainStore.currentPlantIndex');
+
+  @override
+  int get currentPlantIndex {
+    _$currentPlantIndexAtom.context.enforceReadPolicy(_$currentPlantIndexAtom);
+    _$currentPlantIndexAtom.reportObserved();
+    return super.currentPlantIndex;
+  }
+
+  @override
+  set currentPlantIndex(int value) {
+    _$currentPlantIndexAtom.context.conditionallyRunInAction(() {
+      super.currentPlantIndex = value;
+      _$currentPlantIndexAtom.reportChanged();
+    }, _$currentPlantIndexAtom, name: '${_$currentPlantIndexAtom.name}_set');
+  }
+
+  final _$tabDragDirectionAtom = Atom(name: '_MainStore.tabDragDirection');
+
+  @override
+  Direction get tabDragDirection {
+    _$tabDragDirectionAtom.context.enforceReadPolicy(_$tabDragDirectionAtom);
+    _$tabDragDirectionAtom.reportObserved();
+    return super.tabDragDirection;
+  }
+
+  @override
+  set tabDragDirection(Direction value) {
+    _$tabDragDirectionAtom.context.conditionallyRunInAction(() {
+      super.tabDragDirection = value;
+      _$tabDragDirectionAtom.reportChanged();
+    }, _$tabDragDirectionAtom, name: '${_$tabDragDirectionAtom.name}_set');
+  }
+
   final _$_MainStoreActionController = ActionController(name: '_MainStore');
 
   @override
@@ -33,6 +67,26 @@ mixin _$MainStore on _MainStore, Store {
     final _$actionInfo = _$_MainStoreActionController.startAction();
     try {
       return super.setCurrentPage(value);
+    } finally {
+      _$_MainStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void settTabDragDirection(dynamic value) {
+    final _$actionInfo = _$_MainStoreActionController.startAction();
+    try {
+      return super.settTabDragDirection(value);
+    } finally {
+      _$_MainStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCurrentPlantIndex(dynamic value) {
+    final _$actionInfo = _$_MainStoreActionController.startAction();
+    try {
+      return super.setCurrentPlantIndex(value);
     } finally {
       _$_MainStoreActionController.endAction(_$actionInfo);
     }

@@ -16,20 +16,21 @@ abstract class _PlantListStore with Store {
 
   @action
   Future add(Plant plant) async {
-//    await Future.delayed(Duration(seconds: 2));  //TODO: LOADER
     await RepositoryProvider.provider.plantRepo.insert(plant);
     await fetch();
+    log.d(logState(null, plants.last));
   }
 
   @action
   Future update(Plant plant) async {
+    final prevPlant = findNullable(plant);
     await RepositoryProvider.provider.plantRepo.update(plant);
     await fetch();
+    log.d(logState(prevPlant, findNullable(plant)));
   }
 
   @action
   Future fetch() async {
-//    await Future.delayed(Duration(seconds: 2)); //TODO: LOADER + SHOW ANIMATION
     await RepositoryProvider.provider.plantRepo
         .getAll()
         .then((result) => plants = ObservableList.of(result));
@@ -41,10 +42,16 @@ abstract class _PlantListStore with Store {
       await File(plant.imgPath).delete();
     await RepositoryProvider.provider.plantRepo.deleteById(plant.id);
     await fetch();
+    log.d(logState(plant, findNullable(plant)));
   }
 
   @action
   Future find(Plant plant) async {
     return await RepositoryProvider.provider.plantRepo.find(plant.id);
+  }
+
+  @action
+  Plant findNullable(Plant plant) {
+    return plants.firstWhere((p) => p.id == plant.id, orElse: () => null);
   }
 }

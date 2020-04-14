@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/model/plant.dart';
+import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
@@ -53,12 +54,12 @@ class PlantScreen extends StatelessWidget {
                   PlantBodyHero(
                     tag: "stats${store.currentPlantIndex}",
                     child: Container(
-                      height: 460,
+                      height: 455,
                       padding: EdgeInsets.only(
                           top: 170.0 + 24.0,
                           right: DimenUtil.defaultMargin,
                           left: DimenUtil.defaultMargin,
-                          bottom: 36),
+                          bottom: 0),
                       decoration: BoxDecoration(
                           color: ColorUtil.black.withOpacity(.1),
                           borderRadius: BorderRadius.all(
