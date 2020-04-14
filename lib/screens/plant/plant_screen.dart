@@ -96,10 +96,10 @@ class PlantScreen extends StatelessWidget {
                     imgPath: plant.imgPath,
                     editable: true,
                     onTitleChanged: (val) {
-                      plantStore.update(plant.copyWith(nickName: val));
+                      plantStore.update(plant..nickName = val);
                     },
                     onSubTitleChanged: (val) {
-                      plantStore.update(plant.copyWith(name: val));
+                      plantStore.update(plant..name = val);
                     },
                   ),
                 ],

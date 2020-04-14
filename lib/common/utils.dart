@@ -50,8 +50,7 @@ changeInterval(store, days) {
               ),
               value: store.plant.waterInterval,
               onChanged: (int newValue) {
-                var plant = store.plant.copyWith(
-                    waterInterval: newValue);
+                var plant = store.plant..waterInterval = newValue;
                 store.updatePlant(plant);
               },
               items: days

@@ -25,27 +25,6 @@ class Plant extends _Plant with _$Plant {
           fertilizerInterval: fertilizerInterval,
         );
 
-  Plant copyWith(
-      {int id,
-      String nickName,
-      String name,
-      String imgPath,
-      int waterStart,
-      int waterInterval,
-      int fertilizerStart, // in ms
-      int fertilizerInterval}) {
-    var now = DateTime.now().millisecondsSinceEpoch;
-    return Plant(
-        nickName: nickName ?? this.nickName,
-        name: name ?? this.name,
-        imgPath: imgPath ?? this.imgPath,
-        waterStart: waterStart == -1 ? now : this.waterStart,
-        waterInterval: waterInterval ?? this.waterInterval,
-        fertilizerStart: fertilizerStart == -1 ? now : this.fertilizerStart,
-        fertilizerInterval: fertilizerInterval ?? this.fertilizerInterval,
-        id: id ?? this.id);
-  }
-
   factory Plant.fromJson(Map<String, dynamic> json) => _$PlantFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlantToJson(this);

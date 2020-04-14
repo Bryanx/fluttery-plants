@@ -69,7 +69,7 @@ class PlantScreenBody extends StatelessWidget {
       return TakePictureScreen(camera: snapshot.data.first);
     }));
     var oldFilePath = store.plant.imgPath;
-    var plant = store.plant.copyWith(imgPath: imgPath);
+    var plant = store.plant..imgPath = imgPath;
     store.updatePlant(plant);
     // delete old file if its not the placeholder
     if (!oldFilePath.contains("sensevieria")) File(oldFilePath).delete();
