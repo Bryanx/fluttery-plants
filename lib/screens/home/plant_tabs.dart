@@ -1,9 +1,12 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/screens/home/plant_list.dart';
 import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
+
+import 'animated_logo.dart';
 
 ///
 /// Tabbed navigation of plants in certain rooms.
@@ -84,11 +87,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
                   Container(
                       margin: EdgeInsets.only(top: 8.0),
                       padding: EdgeInsets.only(left: 32.0, right: 32.0),
-                      child: Text(
-                        'Orchid',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.title,
-                      ))
+                      child: AnimatedLogo())
                 ],
               ),
             ),
