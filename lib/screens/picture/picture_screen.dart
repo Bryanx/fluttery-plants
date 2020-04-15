@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttering_plants/common/logging.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
@@ -26,7 +27,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
-    controller = CameraController(widget.camera, ResolutionPreset.max);
+    controller = CameraController(widget.camera, ResolutionPreset.medium);
     initializeControllerFuture = controller.initialize();
   }
 
@@ -77,12 +78,12 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                   .replaceAll(".", "_")
                   .replaceAll(":", "_")}.png',
             );
-            developer.log("Attempting to take picture at path: $imgPath");
+            log.d("Attempting to take picture at path: $imgPath");
             await controller.takePicture(imgPath);
-            developer.log("Made picture at path: $imgPath");
+            log.d("Made picture at path: $imgPath");
             Navigator.pop(context, imgPath);
           } catch (e) {
-            print(e);
+            log.e("Something went wrong when taking the picture.", e);
           }
         },
       ),

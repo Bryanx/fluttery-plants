@@ -53,8 +53,11 @@ class PlantHero extends StatelessWidget {
             Row(crossAxisAlignment: CrossAxisAlignment.end, children: <Widget>[
           ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(DimenUtil.defaultRadius - 4)),
-              child: Image.asset(imgPath,
-                  fit: BoxFit.cover, width: 90, height: 90)),
+              child: Image.asset(
+                  imgPath,
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90)),
           Flexible(
             child: PlantTextHero(
               editableText: editable,

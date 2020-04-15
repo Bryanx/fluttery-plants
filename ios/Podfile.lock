@@ -11,16 +11,22 @@ PODS:
     - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
+  - sensors (0.0.1):
+    - Flutter
+  - simple_permissions (0.0.1):
+    - Flutter
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
+  - sensors (from `.symlinks/plugins/sensors/ios`)
+  - simple_permissions (from `.symlinks/plugins/simple_permissions/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
@@ -31,13 +37,17 @@ EXTERNAL SOURCES:
   camera:
     :path: ".symlinks/plugins/camera/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
+  sensors:
+    :path: ".symlinks/plugins/sensors/ios"
+  simple_permissions:
+    :path: ".symlinks/plugins/simple_permissions/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
 
@@ -48,8 +58,10 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
+  sensors: 4bd31219c4bf9d7d4401b392a1701ee3adc1a296
+  simple_permissions: 149cd87a11f83c24bf99f6e8a82f9fc8b70be233
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
 
-PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
+PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 
 COCOAPODS: 1.8.4
