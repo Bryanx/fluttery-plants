@@ -15,6 +15,8 @@ class CustomEditableText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // this prevents the cursor from jumping to the start upon selection
+    controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
     return Flexible(
         child: EditableText(
       backgroundCursorColor: ColorUtil.primaryColor,
