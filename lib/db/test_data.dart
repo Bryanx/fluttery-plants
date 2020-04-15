@@ -1,7 +1,7 @@
 import 'package:fluttering_plants/model/plant.dart';
 
 ///
-/// Class that contains testing data
+/// Initial testing data.
 ///
 class TestData {
   static List<Plant> generateTestPlants() {

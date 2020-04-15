@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
+///
+/// Screen for displaying the output of the camera
+/// and taking a picture.
+///
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
 

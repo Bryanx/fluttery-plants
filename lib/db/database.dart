@@ -7,6 +7,10 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+///
+/// SqLite database provider.
+/// Contains logic for creating/filling the DB.
+///
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();
 

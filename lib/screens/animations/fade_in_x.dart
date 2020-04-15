@@ -3,6 +3,9 @@ import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:simple_animations/simple_animations/controlled_animation.dart';
 import 'package:simple_animations/simple_animations/multi_track_tween.dart';
 
+///
+/// Causes a fade- and moveX animation on load.
+///
 class FadeInX extends StatelessWidget {
   final double delay;
   final Widget child;

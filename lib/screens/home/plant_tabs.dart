@@ -5,6 +5,9 @@ import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
 
+///
+/// Tabbed navigation of plants in certain rooms.
+///
 class PlantTabs extends StatefulWidget {
   const PlantTabs();
 

@@ -5,6 +5,9 @@ import 'package:fluttering_plants/db/database.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:sqflite/sqflite.dart';
 
+///
+/// Contains all methods for interacting with the sqlite db.
+///
 class PlantDao {
   final dbProvider = DatabaseProvider.dbProvider;
 

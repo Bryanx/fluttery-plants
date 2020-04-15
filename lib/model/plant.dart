@@ -4,7 +4,10 @@ import 'package:mobx/mobx.dart';
 
 part 'plant.g.dart';
 
+///
 /// Main plant model.
+/// TODO: find a way to separate PlantStore and model?
+///
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Plant extends _Plant with _$Plant {
   Plant(

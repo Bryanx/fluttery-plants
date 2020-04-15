@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+///
+/// Clickable icon with optional backdrop.
+///
 class BackdropIcon extends StatelessWidget {
   final icon;
   final Function onClick;

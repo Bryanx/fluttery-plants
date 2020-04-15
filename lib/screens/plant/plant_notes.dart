@@ -5,6 +5,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_up.dart';
 
+///
+/// Contains a list of notes that can be applied to a plant.
+///
 class PlantNotes extends StatelessWidget {
   final margin;
 

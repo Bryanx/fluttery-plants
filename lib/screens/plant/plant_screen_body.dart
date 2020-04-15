@@ -25,6 +25,10 @@ import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+///
+/// The main content of the plant screen.
+/// Contains notes.
+///
 class PlantScreenBody extends StatelessWidget {
   final bgColor = ColorUtil.primaryColor;
 

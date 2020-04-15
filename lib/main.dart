@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering_plants/screens/home/home_screen.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
@@ -11,11 +10,13 @@ import 'package:logger/logger.dart';
 
 import 'common/app_theme.dart';
 
+// all navigation routes
 final routes = {
   '/': (BuildContext context) => HomeScreen(),
   '/plant': (BuildContext context) => PlantScreen(),
 };
 
+// main entry point of the app
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));

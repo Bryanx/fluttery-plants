@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/model/plant.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_scale.dart';
-import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
-import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:provider/provider.dart';
 
 ///

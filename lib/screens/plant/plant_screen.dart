@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 ///
 /// Single plant screen
 ///
-
 class PlantScreen extends StatelessWidget {
   final days = List<int>.generate(60, (i) => i += 1);
 

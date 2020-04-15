@@ -1,8 +1,10 @@
 import 'package:fluttering_plants/db/plant_dao.dart';
 import 'package:fluttering_plants/model/plant.dart';
 
+///
 /// Class for fetching data from db or web service
 /// The logic for which to use should come here.
+///
 class PlantRepository {
   final dao = PlantDao();
 

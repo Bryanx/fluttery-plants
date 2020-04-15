@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 import 'package:fluttering_plants/screens/common/custom_editable_text.dart';
 
+///
+/// Contains a simple hero animation with editable or non-editable text.
+///
 class PlantTextHero extends StatelessWidget {
   final bool editableText;
   final String title;

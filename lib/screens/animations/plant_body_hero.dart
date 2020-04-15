@@ -5,12 +5,7 @@ import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
 
 ///
-/// Contains the hero animation.
-///
-/// Allows the hero the remove the cornerradius during transition.
-/// The ClipRRect clips the image with corner radius,
-/// By making the ClipRRect larger than the height of the sizedbox
-/// the cornerradius is removed
+/// Contains a simple hero animation that scales.
 ///
 class PlantBodyHero extends StatelessWidget {
   const PlantBodyHero({Key key, this.width, this.height, this.child, this.tag})

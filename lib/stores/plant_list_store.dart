@@ -8,15 +8,20 @@ import 'package:mobx/mobx.dart';
 
 part 'plant_list_store.g.dart';
 
+///
+/// Plant store that holds all plants in the database.
+///
 class PlantListStore = _PlantListStore with _$PlantListStore;
 
 abstract class _PlantListStore with Store {
   @observable
   ObservableList<Plant> plants = ObservableList<Plant>();
+  
+  final plantRepo = RepositoryProvider.provider.plantRepo;
 
   @action
   Future add(Plant plant) async {
-    await RepositoryProvider.provider.plantRepo.insert(plant);
+    await plantRepo.insert(plant);
     await fetch();
     log.d(logState(null, plants.last));
   }
@@ -24,14 +29,14 @@ abstract class _PlantListStore with Store {
   @action
   Future update(Plant plant) async {
     final prevPlant = findNullable(plant);
-    await RepositoryProvider.provider.plantRepo.update(plant);
+    await plantRepo.update(plant);
     await fetch();
     log.d(logState(prevPlant, findNullable(plant)));
   }
 
   @action
   Future fetch() async {
-    await RepositoryProvider.provider.plantRepo
+    await plantRepo
         .getAll()
         .then((result) => plants = ObservableList.of(result));
   }
@@ -40,14 +45,14 @@ abstract class _PlantListStore with Store {
   Future delete(Plant plant) async {
     if (!plant.imgPath.contains("sensevieria"))
       await File(plant.imgPath).delete();
-    await RepositoryProvider.provider.plantRepo.deleteById(plant.id);
+    await plantRepo.deleteById(plant.id);
     await fetch();
     log.d(logState(plant, findNullable(plant)));
   }
 
   @action
   Future find(Plant plant) async {
-    return await RepositoryProvider.provider.plantRepo.find(plant.id);
+    return await plantRepo.find(plant.id);
   }
 
   @action

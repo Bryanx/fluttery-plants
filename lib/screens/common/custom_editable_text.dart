@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttering_plants/common/color_util.dart';
 
+///
+/// Container for editable text
+///
 class CustomEditableText extends StatelessWidget {
   final style;
   final text;
