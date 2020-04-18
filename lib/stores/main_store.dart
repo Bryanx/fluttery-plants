@@ -4,6 +4,8 @@ import 'package:fluttering_plants/stores/plant_list_store.dart';
 import 'package:fluttering_plants/stores/plant_store.dart';
 import 'package:mobx/mobx.dart';
 
+import 'onboarding_store.dart';
+
 part 'main_store.g.dart';
 
 ///
@@ -15,6 +17,7 @@ class MainStore = _MainStore with _$MainStore;
 abstract class _MainStore with Store {
   final plantStore = PlantStore();
   final plantListStore = PlantListStore();
+  final onboardingStore = OnboardingStore();
 
   @observable
   Page currentPage = Page.Plants;

@@ -91,4 +91,11 @@ mixin _$MainStore on _MainStore, Store {
       _$_MainStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'currentPage: ${currentPage.toString()},currentPlantIndex: ${currentPlantIndex.toString()},tabDragDirection: ${tabDragDirection.toString()}';
+    return '{$string}';
+  }
 }

@@ -28,7 +28,7 @@ class PlantScreenBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 460.0, left: DimenUtil.defaultMargin, right: DimenUtil.defaultMargin, bottom: 24),
+            padding: const EdgeInsets.only(top: 580.0, left: DimenUtil.defaultMargin, right: DimenUtil.defaultMargin, bottom: 24),
             child: PlantNotes(
               margin: EdgeInsets.only(top: 24)
             ),

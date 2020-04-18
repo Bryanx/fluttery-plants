@@ -85,7 +85,7 @@ class _PlantTabsState extends State<PlantTabs> with TickerProviderStateMixin {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(top: 8.0),
+                      margin: EdgeInsets.only(bottom: 8.0),
                       padding: EdgeInsets.only(left: 32.0, right: 32.0),
                       child: AnimatedLogo())
                 ],

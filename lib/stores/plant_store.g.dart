@@ -80,4 +80,11 @@ mixin _$PlantStore on _PlantStore, Store {
       _$_PlantStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string =
+        'plant: ${plant.toString()},waterDaysLeft: ${waterDaysLeft.toString()},fertilizeDaysLeft: ${fertilizeDaysLeft.toString()}';
+    return '{$string}';
+  }
 }

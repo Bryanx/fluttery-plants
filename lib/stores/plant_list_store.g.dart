@@ -73,4 +73,10 @@ mixin _$PlantListStore on _PlantListStore, Store {
       _$_PlantListStoreActionController.endAction(_$actionInfo);
     }
   }
+
+  @override
+  String toString() {
+    final string = 'plants: ${plants.toString()}';
+    return '{$string}';
+  }
 }

@@ -8,6 +8,7 @@ import 'package:fluttering_plants/common/dimen_util.dart';
 import 'package:fluttering_plants/screens/animations/fade_in_x.dart';
 import 'package:fluttering_plants/screens/animations/plant_body_hero.dart';
 import 'package:fluttering_plants/screens/animations/plant_hero.dart';
+import 'package:fluttering_plants/screens/plant/plant_screen.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class PlantList extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         store.setCurrentPlantIndex(index);
-                        return Navigator.of(context).pushNamed("/plant");
+                        return Navigator.of(context).pushNamed(PlantScreen.route);
                       },
                       child: Stack(
                         children: <Widget>[

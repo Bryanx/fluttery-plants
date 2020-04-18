@@ -173,4 +173,11 @@ mixin _$Plant on _Plant, Store {
       _$fertilizerIntervalAtom.reportChanged();
     }, _$fertilizerIntervalAtom, name: '${_$fertilizerIntervalAtom.name}_set');
   }
+
+  @override
+  String toString() {
+    final string =
+        'id: ${id.toString()},nickName: ${nickName.toString()},name: ${name.toString()},imgPath: ${imgPath.toString()},waterStart: ${waterStart.toString()},waterInterval: ${waterInterval.toString()},fertilizerStart: ${fertilizerStart.toString()},fertilizerInterval: ${fertilizerInterval.toString()}';
+    return '{$string}';
+  }
 }

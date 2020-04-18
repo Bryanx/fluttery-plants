@@ -11,6 +11,7 @@ import 'package:fluttering_plants/screens/animations/plant_hero.dart';
 import 'package:fluttering_plants/screens/navigation/drag_direction.dart';
 import 'package:fluttering_plants/screens/plant/backdrop_icon.dart';
 import 'package:fluttering_plants/screens/plant/plant_screen_body.dart';
+import 'package:fluttering_plants/screens/plant/plant_stats.dart';
 import 'package:fluttering_plants/screens/plant/reminder_card.dart';
 import 'package:fluttering_plants/stores/main_store.dart';
 import 'package:fluttering_plants/stores/plant_list_store.dart';
@@ -20,6 +21,9 @@ import 'package:provider/provider.dart';
 /// Single plant screen
 ///
 class PlantScreen extends StatelessWidget {
+
+  static const route = "/plant";
+
   final days = List<int>.generate(60, (i) => i += 1);
 
   @override
@@ -53,7 +57,7 @@ class PlantScreen extends StatelessWidget {
                   PlantBodyHero(
                     tag: "stats${store.currentPlantIndex}",
                     child: Container(
-                      height: 455,
+                      height: 575,
                       padding: EdgeInsets.only(
                           top: 170.0 + 24.0,
                           right: DimenUtil.defaultMargin,
@@ -63,27 +67,7 @@ class PlantScreen extends StatelessWidget {
                           color: ColorUtil.black.withOpacity(.1),
                           borderRadius: BorderRadius.all(
                               Radius.circular(DimenUtil.defaultRadius))),
-                      child: Column(
-                        children: <Widget>[
-                          ReminderCard(
-                            icon: SvgPicture.asset("assets/icons/drop.svg",
-                                height: 60, color: ColorUtil.white),
-                            title: "Tomorrow",
-                            subText: "Needs water",
-                            color: ColorUtil.primaryColor,
-                          ),
-                          ReminderCard(
-                            icon: SvgPicture.asset(
-                                "assets/icons/thunderbolt.svg",
-                                height: 60,
-                                color: ColorUtil.white),
-                            title: "51 days",
-                            subText: "Needs fertilizer in",
-                            margin: EdgeInsets.only(top: 24),
-                            color: ColorUtil.primaryColor,
-                          ),
-                        ],
-                      ),
+                      child: PlantStats(),
                     ),
                   ),
                   PlantHero(
