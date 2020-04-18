@@ -21,7 +21,8 @@ class Step1 extends StatelessWidget {
                       color: ColorUtil.black.withOpacity(.5),
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                    ))),
+                    ))
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 80.0),
               child: FadeInUp(
@@ -37,13 +38,16 @@ class Step1 extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: FadeInUp(
                 delay: 2,
-                child: Text("Beheer je planten samen.",
-                    style: TextStyle(
-                      fontFamily: 'AlegreyaSans',
-                      color: ColorUtil.black.withOpacity(.5),
-                      fontSize: 38,
-                      fontWeight: FontWeight.w500,
-                    )),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Beheer je planten\nsamen.",
+                      style: TextStyle(
+                        fontFamily: 'AlegreyaSans',
+                        color: ColorUtil.black.withOpacity(.5),
+                        fontSize: 36,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
               ),
             ),
           ],

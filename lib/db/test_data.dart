@@ -24,23 +24,9 @@ class TestData {
         id: 3,
         name: "Monstera deliciosa",
         nickName: "Windowleaf",
-        imgPath: "assets/monstera.jpg",
+        imgPath: "assets/sensevieria.jpg",
         waterStart: now,
         fertilizerStart: now);
-    var plant4 = Plant(
-        id: 4,
-        name: "Monstera deliciosa",
-        nickName: "Windowleaf",
-        imgPath: "assets/monstera.jpg",
-        waterStart: now,
-        fertilizerStart: now);
-    var plant5 = Plant(
-        id: 5,
-        name: "Monstera deliciosa",
-        nickName: "Windowleaf",
-        imgPath: "assets/monstera.jpg",
-        waterStart: now,
-        fertilizerStart: now);
-    return [plant1, plant2, plant3, plant4, plant5];
+    return [plant1, plant2, plant3];
   }
 }
